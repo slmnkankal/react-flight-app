@@ -142,10 +142,13 @@ function Register() {
                   label="Subscribe to our newsletter"
                 />
               </div>
-
-              <MDBBtn className="mb-4" size="lg" onClick={handleSubmit}>
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                onClick={handleSubmit}
+              >
                 Register
-              </MDBBtn>
+              </button>
             </MDBCol>
 
             <MDBCol
