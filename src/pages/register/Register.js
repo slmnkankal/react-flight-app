@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {
-  MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -10,7 +9,6 @@ import {
   MDBCardImage,
   MDBInput,
   MDBIcon,
-  MDBCheckbox,
 } from "mdb-react-ui-kit";
 
 function Register() {
@@ -134,14 +132,6 @@ function Register() {
                 />
               </div>
 
-              <div className="mb-4">
-                <MDBCheckbox
-                  name="flexCheck"
-                  value=""
-                  id="flexCheckDefault"
-                  label="Subscribe to our newsletter"
-                />
-              </div>
               <button
                 type="button"
                 class="btn btn-primary btn-lg"

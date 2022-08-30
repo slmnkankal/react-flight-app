@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -7,6 +8,16 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
+    const baseUrl = "http://127.0.0.1:8000/";
+    const registerPath = "users/auth/login/";
+    const registerBody = {
+      email: email,
+      password: password,
+    };
+    axios
+      .post(baseUrl + registerPath, registerBody)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
     setEmail("");
     setPassword("");
   };
@@ -54,7 +65,7 @@ function LoginPage() {
           />
         </form>
         <div className="mt-3">
-          <p>If you don't have an acoount please register</p>
+          <p>If you don't have an account please register!</p>
           <button
             className="btn btn-primary form-control" //onClick={handleProviderLogin}
           >
