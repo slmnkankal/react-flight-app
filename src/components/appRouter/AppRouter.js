@@ -1,13 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "../../pages/loginPage/LoginPage";
+import MainPage from "../../pages/mainPage/MainPage";
 import Register from "../../pages/register/Register";
+import { useContext } from "react";
+import { GlobalContext } from "../../utils/GlobalContext";
 
 function AppRouter() {
+  let token = useContext(GlobalContext);
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={token ? <MainPage /> : <LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="/" element={<App />}>
