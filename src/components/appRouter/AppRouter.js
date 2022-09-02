@@ -4,14 +4,15 @@ import LoginPage from "../../pages/loginPage/LoginPage";
 import MainPage from "../../pages/mainPage/MainPage";
 import Register from "../../pages/register/Register";
 import { useContext } from "react";
-import { GlobalContext } from "../../utils/GlobalContext";
+import { FirebaseAuthContext } from "../../utils/GlobalContext";
+// import { FirebaseAuthContext } from "../utils/GlobalContext";
 
 function AppRouter() {
-  let token = useContext(GlobalContext);
+  const { token } = useContext(FirebaseAuthContext);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={token ? <MainPage /> : <LoginPage />} />
+        <Route path="/" element={true ? <MainPage /> : <LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="/" element={<App />}>

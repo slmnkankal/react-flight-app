@@ -1,3 +1,15 @@
-import { createContext } from "react";
+import { createContext, useState, useEffect } from "react";
 
-export const GlobalContext = createContext("token");
+export const FirebaseAuthContext = createContext();
+
+function AuthContextProvider(props) {
+  const [currentUser, setCurrentUser] = useState();
+
+  return (
+    <FirebaseAuthContext.Provider value={{ currentUser, setCurrentUser }}>
+      {props.children}
+    </FirebaseAuthContext.Provider>
+  );
+}
+
+export default AuthContextProvider;

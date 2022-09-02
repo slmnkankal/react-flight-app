@@ -1,9 +1,11 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { FirebaseAuthContext } from "../../utils/GlobalContext";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { token, setToken } = useContext(FirebaseAuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +23,10 @@ function LoginPage() {
     setEmail("");
     setPassword("");
   };
+  console.log(token, "login");
+  useEffect(() => {
+    setToken("Login Page");
+  }, []);
 
   return (
     <div className="d-flex justify-content-center mt-5">
