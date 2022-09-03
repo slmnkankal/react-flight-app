@@ -5,7 +5,6 @@ import MainPage from "../../pages/mainPage/MainPage";
 import Register from "../../pages/register/Register";
 import { useContext } from "react";
 import { FirebaseAuthContext } from "../../utils/GlobalContext";
-// import { FirebaseAuthContext } from "../utils/GlobalContext";
 
 function AppRouter() {
   const { token } = useContext(FirebaseAuthContext);
