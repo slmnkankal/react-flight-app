@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { FirebaseAuthContext } from "../../utils/GlobalContext";
+import { UserContext } from "../../App";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { token, setToken } = useContext(FirebaseAuthContext);
+
+  const user = useContext(UserContext);
+  console.log(user.token);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,15 +20,11 @@ function LoginPage() {
     };
     axios
       .post(baseUrl + registerPath, registerBody)
-      .then((response) => console.log(response))
+      .then((response) => user.setToken(response))
       .catch((error) => console.log(error));
     setEmail("");
     setPassword("");
   };
-  console.log(token, "login");
-  useEffect(() => {
-    setToken("Login Page");
-  }, []);
 
   return (
     <div className="d-flex justify-content-center mt-5">
