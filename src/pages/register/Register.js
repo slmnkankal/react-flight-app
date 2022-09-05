@@ -10,6 +10,7 @@ import {
   MDBInput,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import HttpRequestService from "../../httpRequestService/HttpRequestService";
 
 function Register() {
   const [userName, setUserName] = useState("");
@@ -67,7 +68,7 @@ function Register() {
                 />
               </div>
               <div className="d-flex flex-row flex-column align-items-center mb-4 ">
-                <p>Your Name</p>
+                <p className="text-start">Your Name</p>
                 <MDBIcon fas icon="user me-3" size="lg" />
                 <MDBInput
                   label=""
@@ -80,7 +81,7 @@ function Register() {
                 />
               </div>
               <div className="d-flex flex-row flex-column align-items-center mb-4 ">
-                <p>Your Surname</p>
+                <p className="text-start">Your Surname</p>
                 <MDBIcon fas icon="user me-3" size="lg" />
                 <MDBInput
                   label=""
@@ -94,7 +95,7 @@ function Register() {
               </div>
 
               <div className="d-flex flex-row flex-column align-items-center mb-4">
-                <p>Your Email</p>
+                <p className="text-start">Your Email</p>
                 <MDBIcon fas icon="envelope me-3" size="lg" />
                 <MDBInput
                   label=""
@@ -107,7 +108,7 @@ function Register() {
               </div>
 
               <div className="d-flex flex-row flex-column align-items-center mb-4">
-                <p>Password</p>
+                <p className="text-start">Password</p>
                 <MDBIcon fas icon="lock me-3" size="lg" />
                 <MDBInput
                   label=""
@@ -120,7 +121,7 @@ function Register() {
               </div>
 
               <div className="d-flex flex-row flex-column align-items-center mb-4">
-                <p>Repeat Your Password</p>
+                <p className="text-start">Repeat Your Password</p>
                 <MDBIcon fas icon="key me-3" size="lg" />
                 <MDBInput
                   label=""
