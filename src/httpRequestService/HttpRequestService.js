@@ -17,7 +17,7 @@ const registerPath = "users/register/";
 
 const register = (data) => {
   return axios
-    .post(baseUrl + registerPath + data)
+    .post(baseUrl + registerPath, data)
     .then((response) => response.data)
     .catch((error) => {
       console.log(error);

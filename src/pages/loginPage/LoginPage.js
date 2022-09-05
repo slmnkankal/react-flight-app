@@ -24,31 +24,27 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const loginResult = await HttpRequestService.login("registerBody");
+      const loginResult = await HttpRequestService.login(registerBody);
       user.setToken(loginResult);
-      setAlertOptions({
-        variant: "success",
-        show: true,
-        message: "You have successfully logged in!",
-      });
+      manageAlertOptions("success", true, "You have successfully logged in!")
     } catch (error) {
       console.log("try-catch: ", error);
-      setAlertOptions({
-        variant: "danger",
-        show: true,
-        message: "Something went wrong!",
-      });
+      manageAlertOptions("danger", true, "Something went wrong!")
     }
     setEmail("");
     setPassword("");
     setTimeout(() => {
-      setAlertOptions({
-        variant: "",
-        show: false,
-        message: "",
-      });
+      manageAlertOptions("", false, "")
     }, 3000);
   };
+
+  const manageAlertOptions = (variant, show, message) => {
+    setAlertOptions({
+      variant: variant,
+      show: show,
+      message: message,
+    });
+  }
 
   // 'success',
   // 'danger',
