@@ -4,14 +4,13 @@ import React, { createContext, useState } from "react";
 
 
 export const UserContext = createContext();
-export const UserNameContext = createContext();
 
 function App() {
   const [token, setToken] = useState(null)
-  const [username, setUserName] = useState(null)
+  const [userDetails, setUserDetails] = useState(null)
   return (
     <div className="App">
-      <UserContext.Provider value={{token, setToken, username, setUserName}}>
+      <UserContext.Provider value={{token, setToken, userDetails, setUserDetails}}>
         <AppRouter />
       </UserContext.Provider>
     </div>

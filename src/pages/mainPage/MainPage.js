@@ -1,10 +1,9 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Table from "react-bootstrap/Table";
-import HttpRequestService from "../../httpRequestService/HttpRequestService";
-import axios from "axios";
 import { UserContext } from "../../App";
 
 
@@ -12,7 +11,7 @@ function MainPage() {
   const [flightsData, setFlightsData] = useState({ flightsBody: [] });
 
   const user = useContext(UserContext);
-  console.log(user)
+  console.log(user.userDetails)
 
   useEffect(() => {
     const fetchFlightsData = async () => {
@@ -37,7 +36,7 @@ function MainPage() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="#login">Mark Otto</a>
+              Signed in as: <a href="#login">{user.userDetails.username}</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
