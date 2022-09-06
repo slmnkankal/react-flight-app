@@ -1,7 +1,6 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert } from "react-bootstrap";
-import { UserContext } from "../../App";
+import { UserContext, UserNameContext } from "../../App";
 import HttpRequestService from "../../httpRequestService/HttpRequestService";
 
 function LoginPage() {
@@ -16,6 +15,9 @@ function LoginPage() {
   const user = useContext(UserContext);
   console.log(user.token);
 
+  const usersName = useContext(UserNameContext);
+  console.log(usersName);
+
   const registerBody = {
     email: email,
     password: password,
@@ -26,6 +28,7 @@ function LoginPage() {
     try {
       const loginResult = await HttpRequestService.login(registerBody);
       user.setToken(loginResult);
+      usersName.setUserName(loginResult);
       manageAlertOptions("success", true, "You have successfully logged in!")
     } catch (error) {
       console.log("try-catch: ", error);

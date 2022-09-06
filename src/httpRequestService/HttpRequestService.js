@@ -25,9 +25,22 @@ const register = (data) => {
     });
 };
 
+const fligthsPath = "flight/flights/"
+
+const flights = (data) => {
+  return axios
+  .post(baseUrl + fligthsPath, data)
+  .then((response) => response.data)
+  .catch((error) => {
+    console.log(error);
+    throw error;
+  })
+}
+
 const HttpRequestService = {
   login,
   register,
+  flights,
 };
 
 export default HttpRequestService;

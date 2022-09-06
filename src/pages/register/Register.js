@@ -1,18 +1,12 @@
-import React, { useState } from "react";
-import axios from "axios";
 import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
-  MDBInput,
-  MDBIcon,
+  MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow
 } from "mdb-react-ui-kit";
-import HttpRequestService from "../../httpRequestService/HttpRequestService";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import HttpRequestService from "../../httpRequestService/HttpRequestService";
 
 
 function Register() {

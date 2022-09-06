@@ -12,7 +12,7 @@ function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={user.token ? <MainPage /> : <LoginPage />} />
+        <Route path="/" element={true ? <MainPage /> : <LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
