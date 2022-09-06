@@ -1,16 +1,10 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import Table from "react-bootstrap/Table";
-import { UserContext } from "../../App";
 
 const FlightsTable = () => {
     const [flightsData, setFlightsData] = useState({ flightsBody: [] });
-
-  const user = useContext(UserContext);
-  console.log(user.userDetails)
 
   useEffect(() => {
     const fetchFlightsData = async () => {
