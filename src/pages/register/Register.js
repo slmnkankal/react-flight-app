@@ -3,9 +3,10 @@ import {
   MDBCardBody,
   MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow
 } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 import HttpRequestService from "../../httpRequestService/HttpRequestService";
 
 
@@ -16,6 +17,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+
+  const user = useContext(UserContext);
+
 
   const [alertOptions, setAlertOptions] = useState({
     variant: null,
@@ -37,6 +41,8 @@ function Register() {
   const handleSubmit = async (e) => {
     try {
       const registerResult = await HttpRequestService.register(registerBody);
+      console.log("email:", registerResult.email)
+      user.setUserEmail(registerResult.email)
       manageAlertOptions("success", true, "You have successfully registered!");
       navigate("/login");
     } catch (error) {
@@ -49,6 +55,9 @@ function Register() {
     setEmail("");
     setPassword("");
     setPassword2("");
+    setTimeout(() => {
+      manageAlertOptions("", false, "")
+    }, 1000);
   };
 
   const manageAlertOptions = (variant, show, message) => {

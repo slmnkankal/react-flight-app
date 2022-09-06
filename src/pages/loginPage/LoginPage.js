@@ -13,6 +13,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const user = useContext(UserContext);
+  console.log(user.userEmail);
 
   const registerBody = {
     email: email,
@@ -24,16 +25,16 @@ function LoginPage() {
     try {
       const loginResult = await HttpRequestService.login(registerBody);
       user.setToken(loginResult.key);
-      user.setUserDetails(loginResult.user)
-      manageAlertOptions("success", true, "You have successfully logged in!")
+      user.setUserDetails(loginResult.user);
+      manageAlertOptions("success", true, "You have successfully logged in!");
     } catch (error) {
       console.log("try-catch: ", error);
-      manageAlertOptions("danger", true, "Something went wrong!")
+      manageAlertOptions("danger", true, "Something went wrong!");
     }
     setEmail("");
     setPassword("");
     setTimeout(() => {
-      manageAlertOptions("", false, "")
+      manageAlertOptions("", false, "");
     }, 3000);
   };
 
@@ -43,7 +44,7 @@ function LoginPage() {
       show: show,
       message: message,
     });
-  }
+  };
 
   // 'success',
   // 'danger',
@@ -73,7 +74,7 @@ function LoginPage() {
                 className="form-control"
                 id="email"
                 placeholder="Enter your email address.."
-                value={email}
+                value={user.userEmail}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
