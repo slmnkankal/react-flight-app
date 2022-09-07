@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
+import { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { UserContext } from "../../App";
 import HttpRequestService from "../../httpRequestService/HttpRequestService";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [alertOptions, setAlertOptions] = useState({
@@ -13,7 +15,8 @@ function LoginPage() {
   const [password, setPassword] = useState("");
 
   const user = useContext(UserContext);
-  console.log(user.userEmail);
+
+  let navigate = useNavigate();
 
   const registerBody = {
     email: email,
@@ -27,9 +30,11 @@ function LoginPage() {
       user.setToken(loginResult.key);
       user.setUserDetails(loginResult.user);
       manageAlertOptions("success", true, "You have successfully logged in!");
+      navigate("/");
     } catch (error) {
       console.log("try-catch: ", error);
       manageAlertOptions("danger", true, "Something went wrong!");
+      navigate("/");
     }
     setEmail("");
     setPassword("");
@@ -46,8 +51,13 @@ function LoginPage() {
     });
   };
 
-  // 'success',
-  // 'danger',
+  useEffect(() => {
+    console.log(user.userEmail);
+    if (user.userEmail) {
+      setEmail(user.userEmail);
+      console.log("abc");
+    }
+  }, []);
 
   return (
     <>
@@ -74,7 +84,7 @@ function LoginPage() {
                 className="form-control"
                 id="email"
                 placeholder="Enter your email address.."
-                value={user.userEmail}
+                value={email} // value={user.Email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
