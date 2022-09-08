@@ -2,10 +2,21 @@ import axios from "axios";
 
 const baseUrl = "http://127.0.0.1:8000/";
 const loginPath = "users/auth/login/";
+const fligthsPath = "flight/flights/"
+const logoutPath = "users/auth/logout/";
 
 const login = (data) => {
   return axios
     .post(baseUrl + loginPath, data)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
+const logout = (data) => {
+  return axios
+    .post(baseUrl + logoutPath, data)
     .then((response) => response.data)
     .catch((error) => {
       console.log(error);
@@ -25,7 +36,6 @@ const register = (data) => {
     });
 };
 
-const fligthsPath = "flight/flights/"
 
 const flights = (data) => {
   return axios
@@ -41,6 +51,7 @@ const HttpRequestService = {
   login,
   register,
   flights,
+  logout,
 };
 
 export default HttpRequestService;

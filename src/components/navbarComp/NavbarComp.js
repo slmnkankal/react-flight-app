@@ -3,11 +3,27 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { UserContext } from "../../App";
+import HttpRequestService from "../../httpRequestService/HttpRequestService";
+import { useNavigate } from "react-router-dom";
+
 
 const NavbarComp = () => {
   const user = useContext(UserContext);
   console.log(user.userDetails);
   const userNameUpperCase = user.userDetails.username.toUpperCase();
+
+  const logoutData = {
+    "key": user.key,
+    "user": user.userDetails,
+}
+
+let navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const result = await HttpRequestService.logout(logoutData);
+    console.log("result:", result)
+    navigate("/login")
+  } 
 
   return (
     <div>
@@ -27,7 +43,7 @@ const NavbarComp = () => {
             </Navbar.Text>
           </Navbar.Collapse>
           <Nav className="me-auto">
-            <Nav.Link href="#logout">Logout</Nav.Link>
+            <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
