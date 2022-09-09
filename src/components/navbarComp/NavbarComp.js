@@ -22,6 +22,10 @@ let navigate = useNavigate();
   const handleLogout = async () => {
     const result = await HttpRequestService.logout(logoutData);
     console.log("result:", result)
+    user.setToken("");
+    user.setUserDetails("");
+    user.setUserEmail("");
+
     navigate("/login")
   } 
 
