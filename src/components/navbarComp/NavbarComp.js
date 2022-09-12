@@ -5,7 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import { UserContext } from "../../App";
 import HttpRequestService from "../../httpRequestService/HttpRequestService";
 import { useNavigate } from "react-router-dom";
-
+import { CgProfile } from "react-icons/cg";
+import { BiLogOut } from "react-icons/bi";
 
 const NavbarComp = () => {
   const user = useContext(UserContext);
@@ -13,21 +14,21 @@ const NavbarComp = () => {
   const userNameUpperCase = user.userDetails.username.toUpperCase();
 
   const logoutData = {
-    "key": user.key,
-    "user": user.userDetails,
-}
+    key: user.key,
+    user: user.userDetails,
+  };
 
-let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const handleLogout = async () => {
     const result = await HttpRequestService.logout(logoutData);
-    console.log("result:", result)
+    console.log("result:", result);
     user.setToken("");
     user.setUserDetails("");
     user.setUserEmail("");
 
-    navigate("/login")
-  } 
+    navigate("/login");
+  };
 
   return (
     <div>
@@ -42,11 +43,13 @@ let navigate = useNavigate();
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as:<span>&ensp;</span>
+              <CgProfile size={"1.5em"} />
+              <span>&ensp;</span>
               <a href="#login">{userNameUpperCase}</a>
             </Navbar.Text>
           </Navbar.Collapse>
-          <Nav className="me-auto">
+          <Nav className="mx-4">
+            <BiLogOut size="1.5em" color="rgba(255, 255, 255, 0.5" className="mt-2" />
             <Nav.Link onClick={() => handleLogout()}>Logout</Nav.Link>
           </Nav>
         </Container>
