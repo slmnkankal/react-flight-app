@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Moment from "react-moment";
+import { useNavigate } from "react-router-dom";
 
 const FlightsTable = () => {
   const [flightsData, setFlightsData] = useState({ flightsBody: [] });
@@ -16,6 +17,13 @@ const FlightsTable = () => {
     };
     fetchFlightsData();
   }, [setFlightsData]);
+
+  let navigate = useNavigate();
+
+
+  const navigateToReservation = () => {
+    navigate("/addreservation")
+  }
   return (
     <div>
       <Container className="fluid">
@@ -46,6 +54,7 @@ const FlightsTable = () => {
                     </Moment>
                   </td>
                   <td>{item.etd}</td>
+                  <td onClick={navigateToReservation}><a href="#">Add Reservation</a></td>
                 </tr>
               ))}
           </tbody>
