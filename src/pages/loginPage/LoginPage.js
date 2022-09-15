@@ -36,8 +36,8 @@ function LoginPage() {
       manageAlertOptions("danger", true, "Something went wrong!");
       navigate("/");
     }
-    setEmail("");
-    setPassword("");
+    // setEmail("");
+    // setPassword("");
     setTimeout(() => {
       manageAlertOptions("", false, "");
     }, 3000);
@@ -57,7 +57,7 @@ function LoginPage() {
       setEmail(user.userEmail);
       console.log("abc");
     }
-  }, []);
+  }, [user.userEmail]);
 
   return (
     <>

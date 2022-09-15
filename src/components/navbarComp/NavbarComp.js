@@ -11,6 +11,7 @@ import { BiLogOut } from "react-icons/bi";
 const NavbarComp = () => {
   const user = useContext(UserContext);
   console.log(user.userDetails);
+  console.log(user.userDetails.id);
   const userNameUpperCase = user.userDetails.username.toUpperCase();
 
   const logoutData = {

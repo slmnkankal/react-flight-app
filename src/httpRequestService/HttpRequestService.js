@@ -47,11 +47,24 @@ const flights = (data) => {
   })
 }
 
+const addReservationPath = "flight/resv/";
+
+const addReservation = (data) => {
+  return axios
+  .post(baseUrl + addReservationPath, data)
+  .then((response) => response.data)
+  .catch((error) => {
+    console.log(error);
+    throw error;
+  })
+}
+
 const HttpRequestService = {
   login,
   register,
   flights,
   logout,
+  addReservation,
 };
 
 export default HttpRequestService;

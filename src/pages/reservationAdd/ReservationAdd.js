@@ -1,11 +1,47 @@
 import React, { useState } from "react";
+import HttpRequestService from "../../httpRequestService/HttpRequestService";
+import { useContext } from "react";
+import { UserContext } from "../../App";
+import { useLocation } from "react-router-dom";
 
 const ReservationAdd = () => {
+  const user = useContext(UserContext);
+
+  const location = useLocation();
+  console.log(location.state);
+  console.log("user", user);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [resvEmail, setResvEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const reservationBody = {
+    flight_id: location?.state?.item?.id,
+    user_id: user.userDetails.id,
+    passenger: [
+      {
+        first_name: firstName,
+        last_name: lastName,
+        email: resvEmail,
+        phone_number: phone,
+      },
+    ],
+  };
+
+  console.log(reservationBody);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const reservationResult = await HttpRequestService.addReservation(
+        reservationBody
+      );
+      console.log("reservation result: ", reservationResult.data);
+    } catch (error) {
+      console.log("error: ", error.response);
+    }
+  };
 
   return (
     <>
@@ -13,17 +49,24 @@ const ReservationAdd = () => {
         <div className="form-image me-5">
           <img src="https://picsum.photos/400/400" alt="sample-post" />
         </div>
-        <div className="register-form">
+        <div className="reservation-form">
           <h1 className="form-title display-3">Passenger Info</h1>
-          <form id="register">
+          <form id="reservation" onSubmit={handleSubmit}>
             <div className="mb-3">
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Open Flight Number</option>
+              <select
+                className="form-select"
+                aria-label="Default select example"
+              >
+                <option selected>Select Flight Number</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
               </select>
             </div>
+            <p>
+              {location?.state?.item?.id} {user.userDetails.id}
+            </p>
+
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
                 First Name
@@ -53,16 +96,16 @@ const ReservationAdd = () => {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
+              <label htmlFor="resvemail" className="form-label">
                 Email
               </label>
               <input
-                type="email"
+                type="resvemail"
                 className="form-control"
-                id="email"
+                id="resvemail"
                 placeholder="Enter your email address.."
-                value={email} // value={user.Email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={resvEmail}
+                onChange={(e) => setResvEmail(e.target.value)}
                 required
               />
             </div>

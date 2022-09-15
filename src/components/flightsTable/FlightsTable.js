@@ -20,9 +20,8 @@ const FlightsTable = () => {
 
   let navigate = useNavigate();
 
-
-  const navigateToReservation = () => {
-    navigate("/addreservation")
+  const navigateToReservation = (item) => {
+    navigate("/addreservation", {state:{item:item}})
   }
   return (
     <div>
@@ -54,7 +53,8 @@ const FlightsTable = () => {
                     </Moment>
                   </td>
                   <td>{item.etd}</td>
-                  <td onClick={navigateToReservation}><a href="#">Add Reservation</a></td>
+                  {/* <td onClick={() => navigateToReservation(item)}><a>Add Reservation</a></td> */}
+                  <td><button onClick={() => navigateToReservation(item)} type="button" class="btn btn-light">Add Reservation</button></td>
                 </tr>
               ))}
           </tbody>
