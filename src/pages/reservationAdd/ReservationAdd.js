@@ -58,15 +58,28 @@ const ReservationAdd = () => {
                 aria-label="Default select example"
               >
                 <option selected>Select Flight Number</option>
+                <option selected>{location?.state?.item?.id}</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
               </select>
             </div>
-            <p>
+            {/* <p>
               {location?.state?.item?.id} {user.userDetails.id}
-            </p>
-
+            </p> */}
+            <div className="mb-3">
+              <label htmlFor="user-id" className="form-label">
+                User Id
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="user-id"
+                placeholder={user.userDetails.id}
+                value={user.userDetails.id} // value={user.Email}
+                required
+              />
+            </div>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
                 First Name
