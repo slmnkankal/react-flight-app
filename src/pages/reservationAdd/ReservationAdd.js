@@ -54,12 +54,14 @@ const ReservationAdd = () => {
           <h1 className="form-title display-3">Passenger Info</h1>
           <form id="reservation" onSubmit={handleSubmit}>
             <div className="mb-3">
+              <label htmlFor="dropdown" className="form-label">Flight Number</label>
               <select
                 className="form-select"
                 aria-label="Default select example"
+                id="dropdown"
               >
                 <option selected>Select Flight Number</option>
-                <option selected>{location?.state?.item?.id}</option>
+                <option selected value={location?.state?.item?.id}>{location?.state?.item?.flight_number}</option>
                 {/* {
                     location.state.item.map((i) => (
                       <option value="1">{i.id}</option>
@@ -75,7 +77,7 @@ const ReservationAdd = () => {
             </p> */}
             <div className="mb-3">
               <label htmlFor="user-id" className="form-label">
-                User Id
+                User Id ({user.userDetails.username})
               </label>
               <input
                 type="number"
@@ -94,7 +96,7 @@ const ReservationAdd = () => {
                 type="text"
                 className="form-control"
                 id="name"
-                placeholder="Enter your first name.."
+                placeholder="Enter passenger's first name.."
                 value={firstName} // value={user.Email}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
@@ -108,7 +110,7 @@ const ReservationAdd = () => {
                 type="text"
                 className="form-control"
                 id="surname"
-                placeholder="Enter your last name.."
+                placeholder="Enter passenger's last name.."
                 value={lastName} // value={user.Email}
                 onChange={(e) => setLastName(e.target.value)}
                 required
@@ -122,7 +124,7 @@ const ReservationAdd = () => {
                 type="resvemail"
                 className="form-control"
                 id="resvemail"
-                placeholder="Enter your email address.."
+                placeholder="Enter passenger's email address.."
                 value={resvEmail}
                 onChange={(e) => setResvEmail(e.target.value)}
                 required
@@ -136,7 +138,7 @@ const ReservationAdd = () => {
                 type="number"
                 className="form-control"
                 id="phone"
-                placeholder="Enter your phone number.."
+                placeholder="Enter passenger's phone number.."
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
