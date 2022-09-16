@@ -11,8 +11,8 @@ function LoginPage() {
     show: false,
     message: "",
   });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("victor@hugo.com");
+  const [password, setPassword] = useState("test.1989");
 
   const user = useContext(UserContext);
 

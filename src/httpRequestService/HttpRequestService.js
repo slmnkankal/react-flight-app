@@ -48,10 +48,15 @@ const flights = (data) => {
 }
 
 const addReservationPath = "flight/resv/";
+const headers = {
+  'Authorization': 'Token 6f49e78d74b4fde060a9a4bdf52f0f3f8fafc9c6'
+}
 
 const addReservation = (data) => {
   return axios
-  .post(baseUrl + addReservationPath, data)
+  .post(baseUrl + addReservationPath, data, {
+    headers: headers
+  })
   .then((response) => response.data)
   .catch((error) => {
     console.log(error);
