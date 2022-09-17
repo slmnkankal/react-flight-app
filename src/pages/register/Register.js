@@ -89,6 +89,7 @@ function Register() {
                 lg="6"
                 className="order-2 order-lg-1 d-flex flex-column align-items-center"
               >
+                <h1 className="form-title display-3">Register</h1>
                 <div className="d-flex  flex-column justify-content-center mb-3 ">
                   <p className="mb-2">Username</p>
                   <MDBIcon fas icon="user me-3" size="lg" />
@@ -168,7 +169,6 @@ function Register() {
                     id="form4"
                     type="password"
                     placeholder="Repeat your password.."
-
                     onChange={(e) => setPassword2(e.target.value)}
                     value={password2}
                     required

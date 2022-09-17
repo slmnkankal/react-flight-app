@@ -53,7 +53,6 @@ const FlightsTable = () => {
                     </Moment>
                   </td>
                   <td>{item.etd}</td>
-                  {/* <td onClick={() => navigateToReservation(item)}><a>Add Reservation</a></td> */}
                   <td><button onClick={() => navigateToReservation(item)} type="button" class="btn btn-light">Add Reservation</button></td>
                 </tr>
               ))}
