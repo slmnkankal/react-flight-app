@@ -63,13 +63,13 @@ const ReservationAdd = () => {
                 <option selected>Select Flight Number</option>
                 <option selected value={location?.state?.item?.id}>{location?.state?.item?.flight_number}</option>
                 {/* {
-                    location.state.item.map((i) => (
-                      <option value="1">{i.id}</option>
+                    location.state.array.map((i) => (
+                      <option key={i.id} value={i.id}>{i.flight_number}</option>
                     ))
                 } */}
-                <option value="1">One</option>
+                {/* <option value="1">One</option>
                 <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="3">Three</option> */}
               </select>
             </div>
             {/* <p>
