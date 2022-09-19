@@ -4,25 +4,31 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
+import HttpRequestService from "../../httpRequestService/HttpRequestService";
 
 const FlightsTable = () => {
-  const [flightsData, setFlightsData] = useState({ flightsBody: [] });
+  const [flightsData, setFlightsData] = useState();
 
   useEffect(() => {
     const fetchFlightsData = async () => {
-      const { data } = await axios("http://127.0.0.1:8000/flight/flights/");
-
-      setFlightsData({ flightsBody: data });
-      console.log(data);
+      try {
+        const data = await HttpRequestService.flights();
+        console.log(data);
+        setFlightsData(data);
+      } catch (error) {
+        // TODO alert
+      }
     };
     fetchFlightsData();
   }, [setFlightsData]);
 
   let navigate = useNavigate();
 
-  const navigateToReservation = (item) => {
-    navigate("/addreservation", {state:{item:item}})
-  }
+  const navigateToReservation = (choosenFlight) => {
+    navigate("/addreservation", {
+      state: { choosenFlight: choosenFlight, allFlights: flightsData },
+    });
+  };
   return (
     <div>
       <Container className="fluid">
@@ -39,23 +45,30 @@ const FlightsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {flightsData.flightsBody &&
-              flightsData.flightsBody.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.flight_number}</td>
-                  <td>{item.operation_airlines}</td>
-                  <td>{item.departure_city}</td>
-                  <td>{item.arrival_city}</td>
-                  <td>
-                    <Moment format="D MMM YYYY" withTitle>
-                      {item.date_of_departure}
-                    </Moment>
-                  </td>
-                  <td>{item.etd}</td>
-                  <td><button onClick={() => navigateToReservation(item)} type="button" class="btn btn-light">Add Reservation</button></td>
-                </tr>
-              ))}
+            {flightsData?.map((singleFlight) => (
+              <tr key={singleFlight.id}>
+                <td>{singleFlight.id}</td>
+                <td>{singleFlight.flight_number}</td>
+                <td>{singleFlight.operation_airlines}</td>
+                <td>{singleFlight.departure_city}</td>
+                <td>{singleFlight.arrival_city}</td>
+                <td>
+                  <Moment format="D MMM YYYY" withTitle>
+                    {singleFlight.date_of_departure}
+                  </Moment>
+                </td>
+                <td>{singleFlight.etd}</td>
+                <td>
+                  <button
+                    onClick={() => navigateToReservation(singleFlight)}
+                    type="button"
+                    class="btn btn-light"
+                  >
+                    Add Reservation
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Container>
