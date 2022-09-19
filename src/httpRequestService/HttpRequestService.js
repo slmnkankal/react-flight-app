@@ -37,9 +37,9 @@ const register = (data) => {
 };
 
 
-const flights = (data) => {
+const flights = () => {
   return axios
-  .post(baseUrl + fligthsPath, data)
+  .get(baseUrl + fligthsPath)
   .then((response) => response.data)
   .catch((error) => {
     console.log(error);
@@ -48,14 +48,17 @@ const flights = (data) => {
 }
 
 const addReservationPath = "flight/resv/";
-const headers = {
-  'Authorization': 'Token 5233b2ea3a2587556b6b2648f0cbd405890b5e92'
-}
+// const headers = {
+//   'Authorization': 'Token 5233b2ea3a2587556b6b2648f0cbd405890b5e92'
+// }
 
 const addReservation = (data) => {
   return axios
-  .post(baseUrl + addReservationPath, data, {
-    headers: headers
+  .post(baseUrl + addReservationPath, data.reservationBody, {
+    headers: {
+  'Authorization': data.token
+
+    }
   })
   .then((response) => response.data)
   .catch((error) => {
