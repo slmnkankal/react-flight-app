@@ -8,8 +8,12 @@ const ReservationAdd = () => {
   const user = useContext(UserContext);
 
   const location = useLocation();
-  console.log("location_state: ",location.state);
+  const choosenFlight = location?.state?.choosenFlight;
+  const allFlights = location?.state?.allFlights;
+  console.log("location_state: ", location.state);
   console.log("user", user);
+
+  // state: { choosenFlight: choosenFlight, allFlights: flightsData },
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,7 +21,7 @@ const ReservationAdd = () => {
   const [phone, setPhone] = useState("");
 
   const reservationBody = {
-    flight_id: location?.state?.item?.id,
+    flight_id: choosenFlight?.id,
     user_id: user.userDetails.id,
     passenger: [
       {
@@ -28,17 +32,25 @@ const ReservationAdd = () => {
       },
     ],
   };
-  
 
   console.log(reservationBody);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(e);
+    var ee = document.getElementById("test");
+    var strSel =
+      "The Value is: " +
+      ee.options[ee.selectedIndex].value +
+      " and text is: " +
+      ee.options[ee.selectedIndex].text;
+    console.log(strSel);
     try {
-      const reservationResult = await HttpRequestService.addReservation(
-        reservationBody
-      );
-      console.log("reservation result: ", reservationResult.data);
+      const reservationResult = await HttpRequestService.addReservation({
+        reservationBody: reservationBody,
+        token: user.token,
+      });
+      // todo alert successfully saved
     } catch (error) {
       console.log("error: ", error.response);
     }
@@ -54,39 +66,28 @@ const ReservationAdd = () => {
           <h1 className="form-title display-3">Passenger Info</h1>
           <form id="reservation" onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="dropdown" className="form-label">Flight Number</label>
+              <label htmlFor="dropdown" className="form-label">
+                Flight Number
+              </label>
               <select
                 className="form-select"
                 aria-label="Default select example"
-                id="dropdown"
+                id="test"
               >
                 <option selected>Select Flight Number</option>
-                <option selected value={location?.state?.item?.id}>{location?.state?.item?.flight_number}</option>
-                {/* {
-                    location.state.array.map((i) => (
-                      <option key={i.id} value={i.id}>{i.flight_number}</option>
-                    ))
-                } */}
-                {/* <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option> */}
+                <option selected value={choosenFlight?.id}>
+                  {choosenFlight?.flight_number}
+                </option>
+                {allFlights?.map((singleFlight) => (
+                  <option
+                    id={singleFlight.id}
+                    key={singleFlight.id}
+                    value={singleFlight.id}
+                  >
+                    {singleFlight.flight_number}
+                  </option>
+                ))}
               </select>
-            </div>
-            {/* <p>
-              {location?.state?.item?.id} {user.userDetails.id}
-            </p> */}
-            <div className="mb-3">
-              <label htmlFor="user-id" className="form-label">
-                User Id ({user.userDetails.username})
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="user-id"
-                placeholder={user.userDetails.id}
-                value={user.userDetails.id} // value={user.Email}
-                required
-              />
             </div>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
