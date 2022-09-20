@@ -5,6 +5,7 @@ import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
 import HttpRequestService from "../../utils/HttpRequestService";
 import { Alert } from "react-bootstrap";
+import moment from "moment";
 
 const FlightsTable = () => {
   const [alertOptions, setAlertOptions] = useState({
@@ -73,17 +74,23 @@ const FlightsTable = () => {
                 <td>{singleFlight.operation_airlines}</td>
                 <td>{singleFlight.departure_city}</td>
                 <td>{singleFlight.arrival_city}</td>
-                <td>
+                {/* <td>
                   <Moment format="D MMM YYYY" withTitle>
                     {singleFlight.date_of_departure}
                   </Moment>
+                </td> */}
+                {/* <td format={momentFormat('LL')}>
+                    {singleFlight.date_of_departure}
+                </td> */}
+                <td>
+                    {moment(`${singleFlight.date_of_departure}`).format('ll')}
                 </td>
                 <td>{singleFlight.etd}</td>
                 <td>
                   <button
                     onClick={() => navigateToReservation(singleFlight)}
                     type="button"
-                    class="btn btn-light"
+                    className="btn btn-light"
                   >
                     Add Reservation
                   </button>
