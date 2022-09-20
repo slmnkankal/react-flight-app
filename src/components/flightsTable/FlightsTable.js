@@ -1,13 +1,34 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
-import HttpRequestService from "../../httpRequestService/HttpRequestService";
+import HttpRequestService from "../../utils/HttpRequestService";
+import { Alert } from "react-bootstrap";
 
 const FlightsTable = () => {
+  const [alertOptions, setAlertOptions] = useState({
+    variant: null,
+    show: false,
+    message: "",
+  });
+
   const [flightsData, setFlightsData] = useState();
+  let navigate = useNavigate();
+
+  const navigateToReservation = (choosenFlight) => {
+    navigate("/addreservation", {
+      state: { choosenFlight: choosenFlight, allFlights: flightsData },
+    });
+  };
+
+  const manageAlertOptions = (variant, show, message) => {
+    setAlertOptions({
+      variant: variant,
+      show: show,
+      message: message,
+    });
+  };
 
   useEffect(() => {
     const fetchFlightsData = async () => {
@@ -16,21 +37,21 @@ const FlightsTable = () => {
         console.log(data);
         setFlightsData(data);
       } catch (error) {
-        // TODO alert
+      manageAlertOptions("danger", true, "You couldn't get flights data!");
       }
     };
     fetchFlightsData();
   }, [setFlightsData]);
 
-  let navigate = useNavigate();
-
-  const navigateToReservation = (choosenFlight) => {
-    navigate("/addreservation", {
-      state: { choosenFlight: choosenFlight, allFlights: flightsData },
-    });
-  };
   return (
     <div>
+      <Alert
+        key={alertOptions.variant}
+        variant={alertOptions.variant}
+        show={alertOptions.show}
+      >
+        {alertOptions.message}
+      </Alert>
       <Container className="fluid">
         <Table className="mt-5" striped>
           <thead>

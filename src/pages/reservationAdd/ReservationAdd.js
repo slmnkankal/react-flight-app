@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import HttpRequestService from "../../httpRequestService/HttpRequestService";
+import HttpRequestService from "../../utils/HttpRequestService";
 import { useContext } from "react";
 import { UserContext } from "../../App";
 import { useLocation } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 
 const ReservationAdd = () => {
   const user = useContext(UserContext);
-
   const location = useLocation();
   const choosenFlight = location?.state?.choosenFlight;
   const allFlights = location?.state?.allFlights;
@@ -14,6 +14,12 @@ const ReservationAdd = () => {
   console.log("user", user);
 
   // state: { choosenFlight: choosenFlight, allFlights: flightsData },
+
+  const [alertOptions, setAlertOptions] = useState({
+    variant: null,
+    show: false,
+    message: "",
+  });
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -33,12 +39,18 @@ const ReservationAdd = () => {
     ],
   };
 
-  console.log(reservationBody);
+  const manageAlertOptions = (variant, show, message) => {
+    setAlertOptions({
+      variant: variant,
+      show: show,
+      message: message,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(e);
-    var ee = document.getElementById("test");
+    var ee = document.getElementById("dropdown");
     var strSel =
       "The Value is: " +
       ee.options[ee.selectedIndex].value +
@@ -46,18 +58,26 @@ const ReservationAdd = () => {
       ee.options[ee.selectedIndex].text;
     console.log(strSel);
     try {
-      const reservationResult = await HttpRequestService.addReservation({
+      await HttpRequestService.addReservation({
         reservationBody: reservationBody,
         token: user.token,
       });
-      // todo alert successfully saved
+      manageAlertOptions("success", true, "Your reservation successfully saved!");
+
     } catch (error) {
-      console.log("error: ", error.response);
+      manageAlertOptions("danger", true, "Your reservation somehow failed!");
     }
   };
 
   return (
     <>
+    <Alert
+        key={alertOptions.variant}
+        variant={alertOptions.variant}
+        show={alertOptions.show}
+      >
+        {alertOptions.message}
+      </Alert>
       <div className="d-flex justify-content-center mt-5">
         <div className="form-image me-5">
           <img src="https://picsum.photos/400/400" alt="sample-post" />
@@ -72,7 +92,7 @@ const ReservationAdd = () => {
               <select
                 className="form-select"
                 aria-label="Default select example"
-                id="test"
+                id="dropdown"
               >
                 <option selected>Select Flight Number</option>
                 <option selected value={choosenFlight?.id}>
