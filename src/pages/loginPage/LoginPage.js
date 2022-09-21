@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { UserContext } from "../../App";
-import HttpRequestService from "../../httpRequestService/HttpRequestService";
+import HttpRequestService from "../../utils/HttpRequestService";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
@@ -15,7 +15,6 @@ function LoginPage() {
   const [password, setPassword] = useState("test.1989");
 
   const user = useContext(UserContext);
-
   let navigate = useNavigate();
 
   const registerBody = {
@@ -52,7 +51,6 @@ function LoginPage() {
   };
 
   useEffect(() => {
-    console.log(user.userEmail);
     if (user.userEmail) {
       setEmail(user.userEmail);
       console.log("abc");

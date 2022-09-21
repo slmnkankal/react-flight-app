@@ -12,7 +12,7 @@ import React, { useContext, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
-import HttpRequestService from "../../httpRequestService/HttpRequestService";
+import HttpRequestService from "../../utils/HttpRequestService";
 
 function Register() {
   const [userName, setUserName] = useState("");
@@ -21,7 +21,6 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
   const user = useContext(UserContext);
 
   const [alertOptions, setAlertOptions] = useState({

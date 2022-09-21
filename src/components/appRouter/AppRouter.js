@@ -8,7 +8,6 @@ import ReservationAdd from "../../pages/reservationAdd/ReservationAdd";
 
 function AppRouter() {
   const user = useContext(UserContext);
-  console.log(user.token);
   
   return (
     <BrowserRouter>
