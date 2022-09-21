@@ -10,8 +10,6 @@ const ReservationAdd = () => {
   const location = useLocation();
   const choosenFlight = location?.state?.choosenFlight;
   const allFlights = location?.state?.allFlights;
-  console.log("location_state: ", location.state);
-  console.log("user", user);
 
   // state: { choosenFlight: choosenFlight, allFlights: flightsData },
 
@@ -62,8 +60,11 @@ const ReservationAdd = () => {
         reservationBody: reservationBody,
         token: user.token,
       });
-      manageAlertOptions("success", true, "Your reservation successfully saved!");
-
+      manageAlertOptions(
+        "success",
+        true,
+        "Your reservation successfully saved!"
+      );
     } catch (error) {
       manageAlertOptions("danger", true, "Your reservation somehow failed!");
     }
@@ -71,7 +72,7 @@ const ReservationAdd = () => {
 
   return (
     <>
-    <Alert
+      <Alert
         key={alertOptions.variant}
         variant={alertOptions.variant}
         show={alertOptions.show}
