@@ -5,6 +5,7 @@ import LoginPage from "../../pages/loginPage/LoginPage";
 import MainPage from "../../pages/mainPage/MainPage";
 import Register from "../../pages/register/Register";
 import ReservationAdd from "../../pages/reservationAdd/ReservationAdd";
+import ReservationsPage from "../../pages/reservationsPage/ReservationsPage";
 
 function AppRouter() {
   const user = useContext(UserContext);
@@ -16,6 +17,7 @@ function AppRouter() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/addreservation" element={<ReservationAdd />} />
+        <Route path="/reservations" element={<ReservationsPage />} />
       </Routes>
     </BrowserRouter>
   );
