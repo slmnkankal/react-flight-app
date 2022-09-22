@@ -1,11 +1,10 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
-import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
 import HttpRequestService from "../../utils/HttpRequestService";
-import { Alert } from "react-bootstrap";
-import moment from "moment";
 
 const FlightsTable = () => {
   const [alertOptions, setAlertOptions] = useState({
@@ -15,6 +14,7 @@ const FlightsTable = () => {
   });
 
   const [flightsData, setFlightsData] = useState();
+
   let navigate = useNavigate();
 
   const navigateToReservation = (choosenFlight) => {
@@ -31,6 +31,10 @@ const FlightsTable = () => {
     });
   };
 
+  const formatTime = (time) => {
+    return moment(time).format('ll')
+  }
+ 
   useEffect(() => {
     const fetchFlightsData = async () => {
       try {
@@ -74,16 +78,8 @@ const FlightsTable = () => {
                 <td>{singleFlight.operation_airlines}</td>
                 <td>{singleFlight.departure_city}</td>
                 <td>{singleFlight.arrival_city}</td>
-                {/* <td>
-                  <Moment format="D MMM YYYY" withTitle>
-                    {singleFlight.date_of_departure}
-                  </Moment>
-                </td> */}
-                {/* <td format={momentFormat('LL')}>
-                    {singleFlight.date_of_departure}
-                </td> */}
                 <td>
-                    {moment(`${singleFlight.date_of_departure}`).format('ll')}
+                    {formatTime(singleFlight.date_of_departure)}
                 </td>
                 <td>{singleFlight.etd}</td>
                 <td>
