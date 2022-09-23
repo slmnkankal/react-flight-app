@@ -5,15 +5,12 @@ import Table from "react-bootstrap/Table";
 import HttpRequestService from "../../utils/HttpRequestService";
 import { UserContext } from "../../App";
 
-
 const ReservationsPage = () => {
   const [alertOptions, setAlertOptions] = useState({
     variant: null,
     show: false,
     message: "",
   });
-
-  const [reservationsData, setReservationsData] = useState();
 
   const manageAlertOptions = (variant, show, message) => {
     setAlertOptions({
@@ -23,14 +20,16 @@ const ReservationsPage = () => {
     });
   };
 
+  const [reservationsData, setReservationsData] = useState();
+
   const user = useContext(UserContext);
-  console.log("user: ", user)
+  console.log("user: ", user);
 
   useEffect(() => {
     const fetchReservationsData = async () => {
       try {
         const data = await HttpRequestService.allReservations(user.token);
-        console.log("data", data);
+        console.log("data: ", data);
         setReservationsData(data);
       } catch (error) {
         manageAlertOptions(
@@ -44,16 +43,16 @@ const ReservationsPage = () => {
       }, 5000);
     };
     fetchReservationsData();
-  }, [setReservationsData]);
+  }, [user.token]);
   return (
     <>
-        <Alert
-          key={alertOptions.variant}
-          variant={alertOptions.variant}
-          show={alertOptions.show}
-        >
-          {alertOptions.message}
-        </Alert>
+      <Alert
+        key={alertOptions.variant}
+        variant={alertOptions.variant}
+        show={alertOptions.show}
+      >
+        {alertOptions.message}
+      </Alert>
       <Container className="fluid">
         <p>This is reservations page!</p>
         <Table striped bordered hover variant="dark">
