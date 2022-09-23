@@ -5,7 +5,7 @@ const loginPath = "users/auth/login/";
 const logoutPath = "users/auth/logout/";
 const fligthsPath = "flight/flights/";
 const registerPath = "users/register/";
-const addReservationPath = "flight/resv/";
+const allReservationsPath = "flight/resv/";
 
 const login = (data) => {
   return axios
@@ -49,9 +49,24 @@ const flights = () => {
 
 const addReservation = (data) => {
   return axios
-    .post(baseUrl + addReservationPath, data.reservationBody, {
+    .post(baseUrl + allReservationsPath, data.reservationBody, {
       headers: {
         Authorization: `Token ${data.token}`,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
+
+const allReservations = (token) => {
+  console.log("token: ",token)
+  return axios
+    .get(baseUrl + allReservationsPath, {
+      headers: {
+        Authorization: `Token ${token}`,
       },
     })
     .then((response) => response.data)
@@ -67,6 +82,7 @@ const HttpRequestService = {
   flights,
   logout,
   addReservation,
+  allReservations,
 };
 
 export default HttpRequestService;
