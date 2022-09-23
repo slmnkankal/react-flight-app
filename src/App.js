@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import "./App.css";
 import AppRouter from "./components/appRouter/AppRouter";
+
 export const UserContext = createContext();
 
 function App() {

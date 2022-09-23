@@ -53,7 +53,6 @@ function LoginPage() {
   useEffect(() => {
     if (user.userEmail) {
       setEmail(user.userEmail);
-      console.log("abc");
     }
   }, [user.userEmail]);
 
