@@ -30,6 +30,10 @@ const NavbarComp = () => {
     }
   };
 
+const goReservations = () => {
+  navigate("/reservations");
+}
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -37,7 +41,7 @@ const NavbarComp = () => {
           <Navbar.Brand href="#home">Flight Dashboard</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="/reservations">My Reservations</Nav.Link>
+            <Nav.Link onClick={goReservations} href="#">My Reservations</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Navbar.Toggle />
