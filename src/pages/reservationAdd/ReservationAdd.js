@@ -60,6 +60,10 @@ const ReservationAdd = () => {
     } catch (error) {
       manageAlertOptions("danger", true, "Your reservation somehow failed!");
     }
+    setFirstName("")
+    setLastName("")
+    setResvEmail("")
+    setPhone("")
   };
 
   return (
