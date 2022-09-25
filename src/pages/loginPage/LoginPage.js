@@ -31,7 +31,6 @@ function LoginPage() {
       manageAlertOptions("success", true, "You have successfully logged in!");
       navigate("/");
     } catch (error) {
-      console.log("try-catch: ", error);
       manageAlertOptions("danger", true, "Something went wrong!");
       navigate("/");
     }

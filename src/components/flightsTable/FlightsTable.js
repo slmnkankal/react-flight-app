@@ -39,7 +39,6 @@ const FlightsTable = () => {
     const fetchFlightsData = async () => {
       try {
         const data = await HttpRequestService.flights();
-        console.log(data);
         setFlightsData(data);
       } catch (error) {
       manageAlertOptions("danger", true, "You couldn't get flights data!");

@@ -47,14 +47,6 @@ const ReservationAdd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
-    var ee = document.getElementById("dropdown");
-    var strSel =
-      "The Value is: " +
-      ee.options[ee.selectedIndex].value +
-      " and text is: " +
-      ee.options[ee.selectedIndex].text;
-    console.log(strSel);
     try {
       await HttpRequestService.addReservation({
         reservationBody: reservationBody,
@@ -94,9 +86,10 @@ const ReservationAdd = () => {
                 className="form-select"
                 aria-label="Default select example"
                 id="dropdown"
+                defaultValue={choosenFlight?.id}
               >
-                <option selected>Select Flight Number</option>
-                <option selected value={choosenFlight?.id}>
+                <option >Select Flight Number</option>
+                <option  value={choosenFlight?.id}>
                   {choosenFlight?.flight_number}
                 </option>
                 {allFlights?.map((singleFlight) => (

@@ -43,7 +43,6 @@ function Register() {
   const handleSubmit = async (e) => {
     try {
       const registerResult = await HttpRequestService.register(registerBody);
-      console.log("email:", registerResult);
       user.setUserEmail(registerResult.email);
       manageAlertOptions("success", true, "You have successfully registered!");
       setTimeout(() => {
@@ -51,7 +50,6 @@ function Register() {
         navigate("/login");
       }, 5000);
     } catch (error) {
-      console.log("try-catch: ", error);
       manageAlertOptions("danger", true, "Something went wrong!");
     }
     setUserName("");

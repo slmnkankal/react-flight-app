@@ -23,13 +23,10 @@ const ReservationsPage = () => {
   const [reservationsData, setReservationsData] = useState();
 
   const user = useContext(UserContext);
-  console.log("user: ", user);
-
   useEffect(() => {
     const fetchReservationsData = async () => {
       try {
         const data = await HttpRequestService.allReservations(user.token);
-        console.log("data: ", data);
         setReservationsData(data);
       } catch (error) {
         manageAlertOptions(
