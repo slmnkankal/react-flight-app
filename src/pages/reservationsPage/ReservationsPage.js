@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import HttpRequestService from "../../utils/HttpRequestService";
 import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const ReservationsPage = () => {
   const [alertOptions, setAlertOptions] = useState({
@@ -21,12 +22,21 @@ const ReservationsPage = () => {
   };
 
   const [reservationsData, setReservationsData] = useState();
-
   const user = useContext(UserContext);
+
+  let navigate = useNavigate();
+
+  const navigateToReservation = (choosenReservation) => {
+    navigate("/updatereservation", {
+      state: { choosenReservation: choosenReservation, allReservations: reservationsData },
+    });
+  };
+
   useEffect(() => {
     const fetchReservationsData = async () => {
       try {
         const data = await HttpRequestService.allReservations(user.token);
+        console.log("data: ", data);
         setReservationsData(data);
       } catch (error) {
         manageAlertOptions(
@@ -52,34 +62,51 @@ const ReservationsPage = () => {
       </Alert>
       <Container className="fluid">
         <p>This is reservations page!</p>
-        <Table striped bordered hover variant="dark">
+        <Table className="mt-5" striped>
           <thead>
             <tr>
-              <th>#</th>
+              <th>ID</th>
+              <th>Flight</th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Username</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Larry</td>
-              <td>Bird</td>
-              <td>@twitter</td>
-            </tr>
+            {reservationsData?.map((singleReservation) => (
+              <tr key={singleReservation.id}>
+                <td>{singleReservation.id}</td>
+                <td>{singleReservation.flight}</td>
+                <td>
+                  {singleReservation.passenger?.map(
+                    (singlePassenger) => singlePassenger.first_name
+                  )}
+                </td>
+                <td>
+                  {singleReservation.passenger?.map(
+                    (singlePassenger) => singlePassenger.last_name
+                  )}
+                </td>
+                <td>
+                  {singleReservation.passenger?.map(
+                    (singlePassenger) => singlePassenger.email
+                  )}
+                </td>
+                {/* <td>
+                    {formatTime(singleFlight.date_of_departure)}
+                </td>
+                <td>{singleFlight.etd}</td> */}
+                <td>
+                  <button
+                    onClick={() => navigateToReservation(singleReservation)}
+                    type="button"
+                    className="btn btn-light"
+                  >
+                    Update Reservation
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Container>
