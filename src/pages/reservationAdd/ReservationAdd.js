@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { UserContext } from "../../App";
 import { useLocation } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const ReservationAdd = () => {
   const user = useContext(UserContext);
@@ -45,6 +46,8 @@ const ReservationAdd = () => {
     });
   };
 
+  let navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -57,6 +60,8 @@ const ReservationAdd = () => {
         true,
         "Your reservation successfully saved!"
       );
+      navigate("/reservations");
+
     } catch (error) {
       manageAlertOptions("danger", true, "Your reservation somehow failed!");
     }
