@@ -67,6 +67,7 @@ const FlightsTable = () => {
               <th>Arrival City</th>
               <th>Date of Departure</th>
               <th>Hour of Departure</th>
+              <th>Add Reservation</th>
             </tr>
           </thead>
           <tbody>

@@ -65,11 +65,12 @@ const ReservationsPage = () => {
         <Table className="mt-5" striped>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Id</th>
               <th>Flight</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
+              <th>Update Reservation</th>
             </tr>
           </thead>
           <tbody>
@@ -78,19 +79,25 @@ const ReservationsPage = () => {
                 <td>{singleReservation.id}</td>
                 <td>{singleReservation.flight}</td>
                 <td>
+                  <ul className="list-unstyled">
                   {singleReservation.passenger?.map(
-                    (singlePassenger) => singlePassenger.first_name
+                    (singlePassenger) => <li>{singlePassenger.first_name}</li> 
                   )}
+                  </ul>
                 </td>
                 <td>
+                  <ul className="list-unstyled">
                   {singleReservation.passenger?.map(
-                    (singlePassenger) => singlePassenger.last_name
+                    (singlePassenger) => <li>{singlePassenger.last_name}</li>
                   )}
+                  </ul>
                 </td>
                 <td>
+                  <ul className="list-unstyled">
                   {singleReservation.passenger?.map(
-                    (singlePassenger) => singlePassenger.email
+                    (singlePassenger) => <li>{singlePassenger.email}</li>
                   )}
+                  </ul>
                 </td>
                 {/* <td>
                     {formatTime(singleFlight.date_of_departure)}
