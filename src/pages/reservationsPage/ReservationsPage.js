@@ -28,7 +28,10 @@ const ReservationsPage = () => {
 
   const navigateToReservation = (choosenReservation) => {
     navigate("/updatereservation", {
-      state: { choosenReservation: choosenReservation, allReservations: reservationsData },
+      state: {
+        choosenReservation: choosenReservation,
+        allReservations: reservationsData,
+      },
     });
   };
 
@@ -74,46 +77,46 @@ const ReservationsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {reservationsData?.map((singleReservation) => (
-              <tr key={singleReservation.id}>
-                <td>{singleReservation.id}</td>
-                <td>{singleReservation.flight}</td>
-                <td>
-                  <ul className="list-unstyled">
-                  {singleReservation.passenger?.map(
-                    (singlePassenger) => <li>{singlePassenger.first_name}</li> 
-                  )}
-                  </ul>
-                </td>
-                <td>
-                  <ul className="list-unstyled">
-                  {singleReservation.passenger?.map(
-                    (singlePassenger) => <li>{singlePassenger.last_name}</li>
-                  )}
-                  </ul>
-                </td>
-                <td>
-                  <ul className="list-unstyled">
-                  {singleReservation.passenger?.map(
-                    (singlePassenger) => <li>{singlePassenger.email}</li>
-                  )}
-                  </ul>
-                </td>
-                {/* <td>
-                    {formatTime(singleFlight.date_of_departure)}
-                </td>
-                <td>{singleFlight.etd}</td> */}
-                <td>
-                  <button
-                    onClick={() => navigateToReservation(singleReservation)}
-                    type="button"
-                    className="btn btn-light"
-                  >
-                    Update Reservation
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {reservationsData?.map((singleReservation) =>
+              singleReservation?.passenger?.map((singlePassenger) => (
+                <tr key={singleReservation.id}>
+                  <td>{singleReservation.id}</td>
+                  <td>{singleReservation.flight}</td>
+                  {/* <td> */}
+                  {/* {singleReservation.passenger?.map((singlePassenger) => ( */}
+                  <td>{singlePassenger.first_name}</td>
+                  {/* ))} */}
+                  {/* </td> */}
+                  {/* <td> */}
+                  {/* {singleReservation.passenger?.map((singlePassenger) => ( */}
+                  <td>{singlePassenger.last_name}</td>
+                  {/* ))} */}
+                  {/* </td> */}
+                  {/* <td> */}
+                  {/* {singleReservation.passenger?.map((singlePassenger) => ( */}
+                  <td>{singlePassenger.email}</td>
+                  {/* ))} */}
+                  {/* </td> */}
+                  <td>
+                    {/* <td className="list-unstyled"> */}
+                    {/* {singleReservation.passenger?.map((singlePassenger) => { */}
+                    {/* return ( */}
+                    {/* <li> */}
+                    <button
+                      onClick={() => navigateToReservation(singleReservation)}
+                      type="button"
+                      className="btn btn-light"
+                    >
+                      Update Reservation
+                    </button>
+                    {/* </li> */}
+                    {/* ); */}
+                    {/* })} */}
+                    {/* </td> */}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </Table>
       </Container>
