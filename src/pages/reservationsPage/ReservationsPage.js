@@ -82,26 +82,10 @@ const ReservationsPage = () => {
                 <tr key={singleReservation.id}>
                   <td>{singleReservation.id}</td>
                   <td>{singleReservation.flight}</td>
-                  {/* <td> */}
-                  {/* {singleReservation.passenger?.map((singlePassenger) => ( */}
                   <td>{singlePassenger.first_name}</td>
-                  {/* ))} */}
-                  {/* </td> */}
-                  {/* <td> */}
-                  {/* {singleReservation.passenger?.map((singlePassenger) => ( */}
                   <td>{singlePassenger.last_name}</td>
-                  {/* ))} */}
-                  {/* </td> */}
-                  {/* <td> */}
-                  {/* {singleReservation.passenger?.map((singlePassenger) => ( */}
                   <td>{singlePassenger.email}</td>
-                  {/* ))} */}
-                  {/* </td> */}
                   <td>
-                    {/* <td className="list-unstyled"> */}
-                    {/* {singleReservation.passenger?.map((singlePassenger) => { */}
-                    {/* return ( */}
-                    {/* <li> */}
                     <button
                       onClick={() => navigateToReservation(singleReservation)}
                       type="button"
@@ -109,10 +93,6 @@ const ReservationsPage = () => {
                     >
                       Update Reservation
                     </button>
-                    {/* </li> */}
-                    {/* ); */}
-                    {/* })} */}
-                    {/* </td> */}
                   </td>
                 </tr>
               ))
