@@ -75,6 +75,21 @@ const allReservations = (token) => {
       throw error;
     });
 };
+const updateReservation = (token, reservationUpdateBody, reservationId) => {
+  console.log("token: ",token)
+  console.log("reservationId, reservationUpdateBody: ", reservationId, reservationUpdateBody)
+  return axios
+    .put(baseUrl + allReservationsPath + reservationId + "/", reservationUpdateBody, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
 
 const HttpRequestService = {
   login,
@@ -83,6 +98,7 @@ const HttpRequestService = {
   logout,
   addReservation,
   allReservations,
+  updateReservation,
 };
 
 export default HttpRequestService;
