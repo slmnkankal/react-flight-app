@@ -1,61 +1,123 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import HttpRequestService from "../../utils/HttpRequestService";
+import { useContext } from "react";
+import { UserContext } from "../../App";
+import { Alert } from "react-bootstrap";
 
 const ReservationUpdate = () => {
   const location = useLocation();
-  console.log("location", location);
   const choosenReservation = location?.state?.choosenReservation;
   const allReservations = location?.state?.allReservations;
+  const user = useContext(UserContext);
 
-  const [firstName, setFirstName] = useState(choosenReservation?.passenger[0].first_name);
-  console.log("first_name: ", firstName)
-  const [lastName, setLastName] = useState(choosenReservation?.passenger[0].last_name);
-  const [resvEmail, setResvEmail] = useState(choosenReservation?.passenger[0].email);
-  const [phone, setPhone] = useState(choosenReservation?.passenger[0].phone_number);
+  const [alertOptions, setAlertOptions] = useState({
+    variant: null,
+    show: false,
+    message: "",
+  });
+
+  const [firstName, setFirstName] = useState(
+    choosenReservation?.passenger[0].first_name
+  );
+  const [lastName, setLastName] = useState(
+    choosenReservation?.passenger[0].last_name
+  );
+  const [resvEmail, setResvEmail] = useState(
+    choosenReservation?.passenger[0].email
+  );
+  const [phone, setPhone] = useState(
+    choosenReservation?.passenger[0].phone_number
+  );
+
+  const reservationUpdateBody = {
+    flight_id: choosenReservation?.id,
+    user_id: user.userDetails.id,
+    passenger: [
+      {
+        pas_id: choosenReservation?.passenger[0].pas_id,
+        first_name: firstName,
+        last_name: lastName,
+        email: resvEmail,
+        phone_number: phone,
+      },
+    ],
+  };
+
+  const manageAlertOptions = (variant, show, message) => {
+    setAlertOptions({
+      variant: variant,
+      show: show,
+      message: message,
+    });
+  };
+  const token = user.token
+  const reservationId = choosenReservation.id
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await HttpRequestService.updateReservation(token, reservationUpdateBody, reservationId);
+      manageAlertOptions(
+        "success",
+        true,
+        "Your reservation successfully updated!"
+      );
+      // navigate("/reservations");
+    } catch (error) {
+      manageAlertOptions(
+        "danger",
+        true,
+        "Your reservation update somehow failed!"
+      );
+    }
+    // setFirstName("");
+    // setLastName("");
+    // setResvEmail("");
+    // setPhone("");
+  };
 
   return (
     <>
-      {/* <Alert
-            key={alertOptions.variant}
-            variant={alertOptions.variant}
-            show={alertOptions.show}
-          >
-            {alertOptions.message}
-          </Alert> */}
+      <Alert
+        key={alertOptions.variant}
+        variant={alertOptions.variant}
+        show={alertOptions.show}
+      >
+        {alertOptions.message}
+      </Alert>
       <div className="d-flex justify-content-center mt-5">
         <div className="form-image me-5">
           <img src="https://picsum.photos/400/400" alt="sample-post" />
         </div>
         <div className="reservation-form">
           <h1 className="form-title display-3">Updating Form</h1>
-          <form
-            id="reservation"
-            //    onSubmit={handleSubmit}
-          >
+          <form id="reservation" onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="dropdown" className="form-label">
-                Flight Number
+              <label htmlFor="name" className="form-label">
+              Flight Number
               </label>
-              <select
-                className="form-select"
-                aria-label="Default select example"
-                id="dropdown"
-                defaultValue={choosenReservation?.id}
-              >
-                {/* <option>Select Flight Number</option> */}
-                <option value={choosenReservation?.id}>
-                  {choosenReservation?.flight}
-                </option>
-                {/* {allReservations?.map((singleReservation) => (
-                      <option
-                        id={singleReservation.id}
-                        key={singleReservation.id}
-                        value={singleReservation.id}
-                      >
-                        {singleReservation.flight_number}
-                      </option>
-                    ))} */}
-              </select>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="Enter passenger's first name.."
+                value={choosenReservation?.id}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Passenger Id
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                placeholder="Enter passenger's first name.."
+                value={choosenReservation?.passenger[0].pas_id}
+                required
+              />
             </div>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
