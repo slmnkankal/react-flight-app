@@ -4,6 +4,7 @@ import HttpRequestService from "../../utils/HttpRequestService";
 import { useContext } from "react";
 import { UserContext } from "../../App";
 import { Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const ReservationUpdate = () => {
   const location = useLocation();
@@ -29,6 +30,8 @@ const ReservationUpdate = () => {
   const [phone, setPhone] = useState(
     choosenReservation?.passenger[0].phone_number
   );
+
+  let navigate = useNavigate();
 
   const reservationUpdateBody = {
     flight_id: choosenReservation?.id,
@@ -63,7 +66,7 @@ const ReservationUpdate = () => {
         true,
         "Your reservation successfully updated!"
       );
-      // navigate("/reservations");
+      navigate("/reservations");
     } catch (error) {
       manageAlertOptions(
         "danger",
