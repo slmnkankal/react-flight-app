@@ -49,13 +49,19 @@ const NavbarComp = () => {
     navigate("/reservations");
   };
 
+  const goHomePage = () => {
+    navigate("/");
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">Flight Dashboard</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link onClick={goHomePage} href="#">
+              Home
+            </Nav.Link>
             <Nav.Link onClick={goReservations} href="#">
               My Reservations
             </Nav.Link>
