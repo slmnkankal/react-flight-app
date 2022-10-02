@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import HttpRequestService from "../../utils/HttpRequestService";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import NavbarComp from "../../components/navbarComp/NavbarComp";
 
 const ReservationsPage = () => {
   const [alertOptions, setAlertOptions] = useState({
@@ -23,6 +24,8 @@ const ReservationsPage = () => {
 
   const [reservationsData, setReservationsData] = useState();
   const user = useContext(UserContext);
+  const token = user.token;
+  console.log(user);
 
   let navigate = useNavigate();
 
@@ -38,7 +41,7 @@ const ReservationsPage = () => {
   useEffect(() => {
     const fetchReservationsData = async () => {
       try {
-        const data = await HttpRequestService.allReservations(user.token);
+        const data = await HttpRequestService.allReservations(token);
         console.log("data: ", data);
         setReservationsData(data);
       } catch (error) {
@@ -53,9 +56,10 @@ const ReservationsPage = () => {
       }, 5000);
     };
     fetchReservationsData();
-  }, [user.token]);
+  }, [token]);
   return (
     <>
+      <NavbarComp />
       <Alert
         key={alertOptions.variant}
         variant={alertOptions.variant}
