@@ -68,8 +68,8 @@ const ReservationsPage = () => {
         {alertOptions.message}
       </Alert>
       <Container className="fluid">
-        <p>This is reservations page!</p>
-        <Table className="mt-5" striped>
+        <h5 className="d-flex justify-content-start mt-5 fw-bold">Reservations</h5>
+        <Table className="mt-1" striped>
           <thead>
             <tr>
               <th>Id</th>

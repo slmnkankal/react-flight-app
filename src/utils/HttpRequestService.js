@@ -62,7 +62,7 @@ const addReservation = (data) => {
 };
 
 const allReservations = (token) => {
-  console.log("token: ",token)
+  console.log("token: ", token)
   return axios
     .get(baseUrl + allReservationsPath, {
       headers: {

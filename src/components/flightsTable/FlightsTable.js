@@ -32,16 +32,16 @@ const FlightsTable = () => {
   };
 
   const formatTime = (time) => {
-    return moment(time).format('ll')
-  }
- 
+    return moment(time).format("ll");
+  };
+
   useEffect(() => {
     const fetchFlightsData = async () => {
       try {
         const data = await HttpRequestService.flights();
         setFlightsData(data);
       } catch (error) {
-      manageAlertOptions("danger", true, "You couldn't get flights data!");
+        manageAlertOptions("danger", true, "You couldn't get flights data!");
       }
     };
     fetchFlightsData();
@@ -57,7 +57,8 @@ const FlightsTable = () => {
         {alertOptions.message}
       </Alert>
       <Container className="fluid">
-        <Table className="mt-5" striped>
+        <h5 className="d-flex justify-content-start mt-5 fw-bold">Flights</h5>
+        <Table className="mt-1" striped>
           <thead>
             <tr>
               <th>Id</th>
@@ -78,9 +79,7 @@ const FlightsTable = () => {
                 <td>{singleFlight.operation_airlines}</td>
                 <td>{singleFlight.departure_city}</td>
                 <td>{singleFlight.arrival_city}</td>
-                <td>
-                    {formatTime(singleFlight.date_of_departure)}
-                </td>
+                <td>{formatTime(singleFlight.date_of_departure)}</td>
                 <td>{singleFlight.etd}</td>
                 <td>
                   <button

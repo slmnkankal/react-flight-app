@@ -10,6 +10,8 @@ const ReservationUpdate = () => {
   const location = useLocation();
   const choosenReservation = location?.state?.choosenReservation;
   const allReservations = location?.state?.allReservations;
+  console.log("choosenReservation: ", choosenReservation)
+  console.log("allReservations: ", allReservations)
   const user = useContext(UserContext);
 
   const [alertOptions, setAlertOptions] = useState({
