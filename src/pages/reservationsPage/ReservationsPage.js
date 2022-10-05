@@ -26,7 +26,6 @@ const ReservationsPage = () => {
   const user = useContext(UserContext);
   const token = user.token;
   console.log(user);
-
   let navigate = useNavigate();
 
   const navigateToReservation = (choosenReservation) => {
@@ -57,6 +56,28 @@ const ReservationsPage = () => {
     };
     fetchReservationsData();
   }, [token]);
+
+    const deleteReservationsData = async (singleReservation) => {
+      const reservationId = singleReservation.id
+      try {
+        await HttpRequestService.deleteReservation(token, reservationId);
+        manageAlertOptions(
+          "success",
+          true,
+          "The reservation is deleted successfully!"
+        );
+      } catch (error) {
+        manageAlertOptions(
+          "danger",
+          true,
+          "You couldn't delete the reservation!"
+        );
+      }
+      setTimeout(() => {
+        manageAlertOptions("", false, "");
+      }, 3000);
+    };
+
   return (
     <>
       <NavbarComp />
@@ -68,7 +89,9 @@ const ReservationsPage = () => {
         {alertOptions.message}
       </Alert>
       <Container className="fluid">
-        <h5 className="d-flex justify-content-start mt-5 fw-bold">Reservations</h5>
+        <h5 className="d-flex justify-content-start mt-5 fw-bold">
+          Reservations
+        </h5>
         <Table className="mt-1" striped>
           <thead>
             <tr>
@@ -78,6 +101,7 @@ const ReservationsPage = () => {
               <th>Last Name</th>
               <th>Email</th>
               <th>Update Reservation</th>
+              <th>Delete Reservation</th>
             </tr>
           </thead>
           <tbody>
@@ -96,6 +120,15 @@ const ReservationsPage = () => {
                       className="btn btn-light"
                     >
                       Update Reservation
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => deleteReservationsData(singleReservation)}
+                      type="button"
+                      className="btn btn-light"
+                    >
+                      Delete Reservation
                     </button>
                   </td>
                 </tr>
