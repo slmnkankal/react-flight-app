@@ -37,9 +37,13 @@ const register = (data) => {
     });
 };
 
-const flights = () => {
+const flights = (token) => {
   return axios
-    .get(baseUrl + fligthsPath)
+    .get(baseUrl + fligthsPath, {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
     .then((response) => response.data)
     .catch((error) => {
       console.log(error);
@@ -62,7 +66,6 @@ const addReservation = (data) => {
 };
 
 const allReservations = (token) => {
-  console.log("token: ", token)
   return axios
     .get(baseUrl + allReservationsPath, {
       headers: {
@@ -76,8 +79,6 @@ const allReservations = (token) => {
     });
 };
 const updateReservation = (token, reservationUpdateBody, reservationId) => {
-  console.log("token: ",token)
-  console.log("reservationId, reservationUpdateBody: ", reservationId, reservationUpdateBody)
   return axios
     .put(baseUrl + allReservationsPath + reservationId + "/", reservationUpdateBody, {
       headers: {
@@ -91,8 +92,6 @@ const updateReservation = (token, reservationUpdateBody, reservationId) => {
     });
 };
 const deleteReservation = (token, reservationId) => {
-  console.log("token: ",token)
-  console.log("reservationId: ", reservationId)
   return axios
     .delete(baseUrl + allReservationsPath + reservationId + "/", {
       headers: {
