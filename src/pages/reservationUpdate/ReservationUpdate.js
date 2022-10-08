@@ -9,9 +9,7 @@ import { useNavigate } from "react-router-dom";
 const ReservationUpdate = () => {
   const location = useLocation();
   const choosenReservation = location?.state?.choosenReservation;
-  const allReservations = location?.state?.allReservations;
-  console.log("choosenReservation: ", choosenReservation)
-  console.log("allReservations: ", allReservations)
+  const choosenPassenger = location?.state?.choosenPassenger;
   const user = useContext(UserContext);
 
   const [alertOptions, setAlertOptions] = useState({
@@ -21,26 +19,29 @@ const ReservationUpdate = () => {
   });
 
   const [firstName, setFirstName] = useState(
-    choosenReservation?.passenger[0].first_name
+    choosenPassenger?.first_name
   );
   const [lastName, setLastName] = useState(
-    choosenReservation?.passenger[0].last_name
+    choosenPassenger?.last_name
   );
   const [resvEmail, setResvEmail] = useState(
-    choosenReservation?.passenger[0].email
+    choosenPassenger?.email
   );
   const [phone, setPhone] = useState(
-    choosenReservation?.passenger[0].phone_number
+    choosenPassenger?.phone_number
   );
 
   let navigate = useNavigate();
 
   const reservationUpdateBody = {
-    flight_id: choosenReservation?.id,
-    user_id: user.userDetails.id,
+    id: choosenReservation?.id,
+    flight: choosenReservation?.flight,
+    flight_id: choosenReservation?.flight_id,
+    user: choosenReservation?.user,
     passenger: [
       {
-        pas_id: choosenReservation?.passenger[0].pas_id,
+        id: choosenPassenger?.id,
+        pas_id: choosenPassenger?.pas_id,
         first_name: firstName,
         last_name: lastName,
         email: resvEmail,
