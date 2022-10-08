@@ -1,10 +1,11 @@
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
 import HttpRequestService from "../../utils/HttpRequestService";
+import { UserContext } from "../../App";
 
 const FlightsTable = () => {
   const [alertOptions, setAlertOptions] = useState({
@@ -14,6 +15,8 @@ const FlightsTable = () => {
   });
 
   const [flightsData, setFlightsData] = useState();
+  const user = useContext(UserContext);
+  const token = user.token;
 
   let navigate = useNavigate();
 
@@ -38,7 +41,7 @@ const FlightsTable = () => {
   useEffect(() => {
     const fetchFlightsData = async () => {
       try {
-        const data = await HttpRequestService.flights();
+        const data = await HttpRequestService.flights(token);
         setFlightsData(data);
       } catch (error) {
         manageAlertOptions("danger", true, "You couldn't get flights data!");

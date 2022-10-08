@@ -25,23 +25,43 @@ const ReservationsPage = () => {
   const [reservationsData, setReservationsData] = useState();
   const user = useContext(UserContext);
   const token = user.token;
-  console.log(user);
   let navigate = useNavigate();
 
-  const navigateToReservation = (choosenReservation) => {
+  const navigateToReservation = (choosenReservation, choosenPassenger) => {
     navigate("/updatereservation", {
       state: {
-        choosenReservation: choosenReservation,
+        choosenReservation,
+        choosenPassenger,
         allReservations: reservationsData,
       },
     });
+  };
+
+  const deleteReservationsData = async (singleReservation) => {
+    const reservationId = singleReservation.id;
+    try {
+      await HttpRequestService.deleteReservation(token, reservationId);
+      manageAlertOptions(
+        "success",
+        true,
+        "The reservation is deleted successfully!"
+      );
+    } catch (error) {
+      manageAlertOptions(
+        "danger",
+        true,
+        "You couldn't delete the reservation!"
+      );
+    }
+    setTimeout(() => {
+      manageAlertOptions("", true, "");
+    }, 3000);
   };
 
   useEffect(() => {
     const fetchReservationsData = async () => {
       try {
         const data = await HttpRequestService.allReservations(token);
-        console.log("data: ", data);
         setReservationsData(data);
       } catch (error) {
         manageAlertOptions(
@@ -56,27 +76,6 @@ const ReservationsPage = () => {
     };
     fetchReservationsData();
   }, [token]);
-
-    const deleteReservationsData = async (singleReservation) => {
-      const reservationId = singleReservation.id
-      try {
-        await HttpRequestService.deleteReservation(token, reservationId);
-        manageAlertOptions(
-          "success",
-          true,
-          "The reservation is deleted successfully!"
-        );
-      } catch (error) {
-        manageAlertOptions(
-          "danger",
-          true,
-          "You couldn't delete the reservation!"
-        );
-      }
-      setTimeout(() => {
-        manageAlertOptions("", false, "");
-      }, 3000);
-    };
 
   return (
     <>
@@ -106,8 +105,8 @@ const ReservationsPage = () => {
           </thead>
           <tbody>
             {reservationsData?.map((singleReservation) =>
-              singleReservation?.passenger?.map((singlePassenger) => (
-                <tr key={singleReservation.id}>
+              singleReservation?.passenger?.map((singlePassenger, index) => (
+                <tr key={index}>
                   <td>{singleReservation.id}</td>
                   <td>{singleReservation.flight}</td>
                   <td>{singlePassenger.first_name}</td>
@@ -115,7 +114,7 @@ const ReservationsPage = () => {
                   <td>{singlePassenger.email}</td>
                   <td>
                     <button
-                      onClick={() => navigateToReservation(singleReservation)}
+                      onClick={() => navigateToReservation(singleReservation, singlePassenger)}
                       type="button"
                       className="btn btn-light"
                     >
