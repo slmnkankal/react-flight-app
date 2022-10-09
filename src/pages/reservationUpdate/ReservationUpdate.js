@@ -121,7 +121,7 @@ const ReservationUpdate = () => {
                 className="form-control"
                 id="name"
                 placeholder="Enter passenger's first name.."
-                value={choosenReservation?.passenger[0].pas_id}
+                value={choosenPassenger?.pas_id}
                 required
               />
             </div>
