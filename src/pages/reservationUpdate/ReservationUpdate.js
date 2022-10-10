@@ -18,36 +18,33 @@ const ReservationUpdate = () => {
     message: "",
   });
 
-  const [firstName, setFirstName] = useState(
-    choosenPassenger?.first_name
-  );
-  const [lastName, setLastName] = useState(
-    choosenPassenger?.last_name
-  );
-  const [resvEmail, setResvEmail] = useState(
-    choosenPassenger?.email
-  );
-  const [phone, setPhone] = useState(
-    choosenPassenger?.phone_number
-  );
+  const [firstName, setFirstName] = useState(choosenPassenger?.first_name);
+  const [lastName, setLastName] = useState(choosenPassenger?.last_name);
+  const [resvEmail, setResvEmail] = useState(choosenPassenger?.email);
+  const [phone, setPhone] = useState(choosenPassenger?.phone_number);
 
   let navigate = useNavigate();
+
+  const unchangedPassengerFunction = (unchangedPassengerItem) => {
+    return unchangedPassengerItem.id !== choosenPassenger?.id;
+  }
+  const unchangedPassengerList = choosenReservation?.passenger.filter(unchangedPassengerFunction);
+  const updatePassengerItem = {
+    id: choosenPassenger?.id,
+    pas_id: choosenPassenger?.pas_id,
+    first_name: firstName,
+    last_name: lastName,
+    email: resvEmail,
+    phone_number: phone,
+  };
+  const passengerList = [...unchangedPassengerList, updatePassengerItem];
 
   const reservationUpdateBody = {
     id: choosenReservation?.id,
     flight: choosenReservation?.flight,
     flight_id: choosenReservation?.flight_id,
     user: choosenReservation?.user,
-    passenger: [
-      {
-        id: choosenPassenger?.id,
-        pas_id: choosenPassenger?.pas_id,
-        first_name: firstName,
-        last_name: lastName,
-        email: resvEmail,
-        phone_number: phone,
-      },
-    ],
+    passenger: passengerList,
   };
 
   const manageAlertOptions = (variant, show, message) => {
@@ -57,13 +54,17 @@ const ReservationUpdate = () => {
       message: message,
     });
   };
-  const token = user.token
-  const reservationId = choosenReservation.id
+  const token = user.token;
+  const reservationId = choosenReservation.id;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await HttpRequestService.updateReservation(token, reservationUpdateBody, reservationId);
+      await HttpRequestService.updateReservation(
+        token,
+        reservationUpdateBody,
+        reservationId
+      );
       manageAlertOptions(
         "success",
         true,
@@ -101,7 +102,7 @@ const ReservationUpdate = () => {
           <form id="reservation" onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
-              Flight Number
+                Flight Number
               </label>
               <input
                 type="text"

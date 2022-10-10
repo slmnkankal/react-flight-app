@@ -41,6 +41,7 @@ const ReservationsPage = () => {
     const reservationId = singleReservation.id;
     try {
       await HttpRequestService.deleteReservation(token, reservationId);
+      fetchReservationsData();
       manageAlertOptions(
         "success",
         true,
@@ -58,24 +59,21 @@ const ReservationsPage = () => {
     }, 3000);
   };
 
+  const fetchReservationsData = async () => {
+    try {
+      const data = await HttpRequestService.allReservations(token);
+      setReservationsData(data);
+    } catch (error) {
+      manageAlertOptions("danger", true, "You couldn't get reservations data!");
+    }
+    setTimeout(() => {
+      manageAlertOptions("", false, "");
+    }, 5000);
+  };
+
   useEffect(() => {
-    const fetchReservationsData = async () => {
-      try {
-        const data = await HttpRequestService.allReservations(token);
-        setReservationsData(data);
-      } catch (error) {
-        manageAlertOptions(
-          "danger",
-          true,
-          "You couldn't get reservations data!"
-        );
-      }
-      setTimeout(() => {
-        manageAlertOptions("", false, "");
-      }, 5000);
-    };
     fetchReservationsData();
-  }, [token]);
+  }, []);
 
   return (
     <>
@@ -114,7 +112,12 @@ const ReservationsPage = () => {
                   <td>{singlePassenger.email}</td>
                   <td>
                     <button
-                      onClick={() => navigateToReservation(singleReservation, singlePassenger)}
+                      onClick={() =>
+                        navigateToReservation(
+                          singleReservation,
+                          singlePassenger
+                        )
+                      }
                       type="button"
                       className="btn btn-light"
                     >
