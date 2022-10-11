@@ -37,6 +37,14 @@ const ReservationsPage = () => {
     });
   };
 
+  const navigateToAddPassenger = (choosenReservation) => {
+    navigate("/addpassenger", {
+      state: {
+        choosenReservation,
+      },
+    });
+  };
+
   const deleteReservationsData = async (singleReservation) => {
     const reservationId = singleReservation.id;
     try {
@@ -98,6 +106,7 @@ const ReservationsPage = () => {
               <th>Last Name</th>
               <th>Email</th>
               <th>Update Reservation</th>
+              <th>Add Passenger</th>
               <th>Delete Reservation</th>
             </tr>
           </thead>
@@ -122,6 +131,15 @@ const ReservationsPage = () => {
                       className="btn btn-light"
                     >
                       Update Reservation
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => navigateToAddPassenger(singleReservation)}
+                      type="button"
+                      className="btn btn-light"
+                    >
+                      Add Passenger
                     </button>
                   </td>
                   <td>

@@ -91,9 +91,24 @@ const updateReservation = (token, reservationUpdateBody, reservationId) => {
       throw error;
     });
 };
+
 const deleteReservation = (token, reservationId) => {
   return axios
     .delete(baseUrl + allReservationsPath + reservationId + "/", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
+
+const addPassengerRequest = (token, reservationUpdateBody, reservationId) => {
+  return axios
+    .put(baseUrl + allReservationsPath + reservationId + "/", reservationUpdateBody, {
       headers: {
         Authorization: `Token ${token}`,
       },
@@ -114,6 +129,7 @@ const HttpRequestService = {
   allReservations,
   updateReservation,
   deleteReservation,
+  addPassengerRequest,
 };
 
 export default HttpRequestService;

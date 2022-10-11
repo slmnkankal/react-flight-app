@@ -7,11 +7,14 @@ import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavbarComp from "../../components/navbarComp/NavbarComp";
 
-const ReservationUpdate = () => {
+const AddPassenger = () => {
   const location = useLocation();
   const choosenReservation = location?.state?.choosenReservation;
   const choosenPassenger = location?.state?.choosenPassenger;
   const user = useContext(UserContext);
+
+  const token = user.token;
+  const reservationId = choosenReservation.id;
 
   const [alertOptions, setAlertOptions] = useState({
     variant: null,
@@ -19,12 +22,20 @@ const ReservationUpdate = () => {
     message: "",
   });
 
-  const [firstName, setFirstName] = useState(choosenPassenger?.first_name);
-  const [lastName, setLastName] = useState(choosenPassenger?.last_name);
-  const [resvEmail, setResvEmail] = useState(choosenPassenger?.email);
-  const [phone, setPhone] = useState(choosenPassenger?.phone_number);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [resvEmail, setResvEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   let navigate = useNavigate();
+
+  const manageAlertOptions = (variant, show, message) => {
+    setAlertOptions({
+      variant: variant,
+      show: show,
+      message: message,
+    });
+  };
 
   const unchangedPassengerFunction = (unchangedPassengerItem) => {
     return unchangedPassengerItem.id !== choosenPassenger?.id;
@@ -32,15 +43,13 @@ const ReservationUpdate = () => {
   const unchangedPassengerList = choosenReservation?.passenger.filter(
     unchangedPassengerFunction
   );
-  const updatePassengerItem = {
-    id: choosenPassenger?.id,
-    pas_id: choosenPassenger?.pas_id,
+  const addPassengerItem = {
     first_name: firstName,
     last_name: lastName,
     email: resvEmail,
     phone_number: phone,
   };
-  const passengerList = [...unchangedPassengerList, updatePassengerItem];
+  const passengerList = [...unchangedPassengerList, addPassengerItem];
 
   const reservationUpdateBody = {
     id: choosenReservation?.id,
@@ -50,20 +59,10 @@ const ReservationUpdate = () => {
     passenger: passengerList,
   };
 
-  const manageAlertOptions = (variant, show, message) => {
-    setAlertOptions({
-      variant: variant,
-      show: show,
-      message: message,
-    });
-  };
-  const token = user.token;
-  const reservationId = choosenReservation.id;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await HttpRequestService.updateReservation(
+      await HttpRequestService.addPassengerRequest(
         token,
         reservationUpdateBody,
         reservationId
@@ -71,14 +70,14 @@ const ReservationUpdate = () => {
       manageAlertOptions(
         "success",
         true,
-        "Your reservation successfully updated!"
+        "The passenger added to the reservation successfully!"
       );
       navigate("/reservations");
     } catch (error) {
       manageAlertOptions(
         "danger",
         true,
-        "Your reservation update somehow failed!"
+        "The passenger couldn't added to the reservation!"
       );
     }
   };
@@ -98,34 +97,8 @@ const ReservationUpdate = () => {
           <img src="https://picsum.photos/400/400" alt="sample-post" />
         </div>
         <div className="reservation-form">
-          <h1 className="form-title display-3">Updating Form</h1>
+          <h1 className="form-title display-3">New Passenger</h1>
           <form id="reservation" onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Flight Number
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                placeholder="Enter passenger's first name.."
-                value={choosenReservation?.id}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Passenger Id
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                placeholder="Enter passenger's first name.."
-                value={choosenPassenger?.pas_id}
-                required
-              />
-            </div>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
                 First Name
@@ -194,4 +167,4 @@ const ReservationUpdate = () => {
   );
 };
 
-export default ReservationUpdate;
+export default AddPassenger;
