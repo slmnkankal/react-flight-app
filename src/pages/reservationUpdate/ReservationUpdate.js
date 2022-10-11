@@ -23,6 +23,7 @@ const ReservationUpdate = () => {
   const [lastName, setLastName] = useState(choosenPassenger?.last_name);
   const [resvEmail, setResvEmail] = useState(choosenPassenger?.email);
   const [phone, setPhone] = useState(choosenPassenger?.phone_number);
+  // const [deleteValue, setDeleteValue] = useState(0);
 
   let navigate = useNavigate();
 
@@ -59,6 +60,11 @@ const ReservationUpdate = () => {
   };
   const token = user.token;
   const reservationId = choosenReservation.id;
+
+  // const handleClick = () => {
+  //   setDeleteValue(1);
+  //     navigate("/reservations");
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -182,11 +188,24 @@ const ReservationUpdate = () => {
                 required
               />
             </div>
-            <input
+            {/* <input
               type="submit"
               className="btn btn-primary form-control"
               value="Update Reservation"
-            />
+            /> */}
+            <div className="d-flex mt-2">
+              <input
+                type="submit"
+                className="btn btn-primary form-control m-1"
+                value="Update"
+              />
+              <input
+                type="button"
+                className="btn btn-primary form-control m-1"
+                value="Delete"
+                // onClick={handleClick()}
+              />
+            </div>
           </form>
         </div>
       </div>

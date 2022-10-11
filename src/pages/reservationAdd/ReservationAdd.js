@@ -58,12 +58,12 @@ const ReservationAdd = () => {
       manageAlertOptions(
         "success",
         true,
-        "Your reservation successfully saved!"
+        "Your reservation is successfully saved!"
       );
       navigate("/reservations");
 
     } catch (error) {
-      manageAlertOptions("danger", true, "Your reservation somehow failed!");
+      manageAlertOptions("danger", true, "Your reservation is somehow failed!");
     }
     setFirstName("")
     setLastName("")

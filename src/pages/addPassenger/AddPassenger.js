@@ -158,7 +158,7 @@ const AddPassenger = () => {
             <input
               type="submit"
               className="btn btn-primary form-control"
-              value="Update Reservation"
+              value="Add Passenger"
             />
           </form>
         </div>

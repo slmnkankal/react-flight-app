@@ -25,6 +25,9 @@ const FlightsTable = () => {
       state: { choosenFlight: choosenFlight, allFlights: flightsData },
     });
   };
+  const navigateToAddFlight = () => {
+    navigate("/addflight");
+  };
 
   const manageAlertOptions = (variant, show, message) => {
     setAlertOptions({
@@ -38,17 +41,18 @@ const FlightsTable = () => {
     return moment(time).format("ll");
   };
 
+  const fetchFlightsData = async () => {
+    try {
+      const data = await HttpRequestService.flights(token);
+      setFlightsData(data);
+    } catch (error) {
+      manageAlertOptions("danger", true, "You couldn't get flights data!");
+    }
+  };
+
   useEffect(() => {
-    const fetchFlightsData = async () => {
-      try {
-        const data = await HttpRequestService.flights(token);
-        setFlightsData(data);
-      } catch (error) {
-        manageAlertOptions("danger", true, "You couldn't get flights data!");
-      }
-    };
     fetchFlightsData();
-  }, [setFlightsData]);
+  }, []);
 
   return (
     <div>
@@ -60,7 +64,16 @@ const FlightsTable = () => {
         {alertOptions.message}
       </Alert>
       <Container className="fluid">
-        <h5 className="d-flex justify-content-start mt-5 fw-bold">Flights</h5>
+        <div className="d-flex justify-content-between">
+          <h5 className="d-flex justify-content-start mt-5 fw-bold">Flights</h5>
+          <button
+            type="button"
+            className="btn btn-light py-1"
+            onClick={() => navigateToAddFlight()}
+          >
+            Add Flight
+          </button>
+        </div>
         <Table className="mt-1" striped>
           <thead>
             <tr>

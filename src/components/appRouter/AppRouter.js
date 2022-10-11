@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserContext } from "../../App";
+import FlightAdd from "../../pages/flightAdd/FlightAdd";
 import AddPassenger from "../../pages/addPassenger/AddPassenger";
 import LoginPage from "../../pages/loginPage/LoginPage";
 import MainPage from "../../pages/mainPage/MainPage";
@@ -22,6 +23,7 @@ function AppRouter() {
         <Route path="/reservations" element={<ReservationsPage />} />
         <Route path="/updatereservation" element={<ReservationUpdate />} />
         <Route path="/addpassenger" element={<AddPassenger />} />
+        <Route path="/addflight" element={<FlightAdd />} />
       </Routes>
     </BrowserRouter>
   );
