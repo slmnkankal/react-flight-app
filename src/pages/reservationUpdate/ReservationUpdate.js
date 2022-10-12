@@ -77,14 +77,14 @@ const ReservationUpdate = () => {
       manageAlertOptions(
         "success",
         true,
-        "Your reservation successfully updated!"
+        "Your reservation is successfully updated!"
       );
       navigate("/reservations");
     } catch (error) {
       manageAlertOptions(
         "danger",
         true,
-        "Your reservation update somehow failed!"
+        "Your reservation updating is failed!"
       );
     }
   };

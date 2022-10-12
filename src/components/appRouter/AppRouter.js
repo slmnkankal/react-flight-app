@@ -9,6 +9,7 @@ import Register from "../../pages/register/Register";
 import ReservationAdd from "../../pages/reservationAdd/ReservationAdd";
 import ReservationsPage from "../../pages/reservationsPage/ReservationsPage";
 import ReservationUpdate from "../../pages/reservationUpdate/ReservationUpdate";
+import FlightUpdate from "../../pages/flightUpdate/FlightUpdate";
 
 function AppRouter() {
   const user = useContext(UserContext);
@@ -24,6 +25,7 @@ function AppRouter() {
         <Route path="/updatereservation" element={<ReservationUpdate />} />
         <Route path="/addpassenger" element={<AddPassenger />} />
         <Route path="/addflight" element={<FlightAdd />} />
+        <Route path="/updateflight" element={<FlightUpdate />} />
       </Routes>
     </BrowserRouter>
   );

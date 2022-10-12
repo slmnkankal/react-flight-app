@@ -50,11 +50,26 @@ const flights = (token) => {
       throw error;
     });
 };
+
 const addFlight = (data) => {
   return axios
     .post(baseUrl + fligthsPath, data.flightBody, {
       headers: {
         Authorization: `Token ${data.token}`,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
+
+const updateFlight = (token, flightUpdateBody, flightId) => {
+  return axios
+    .put(baseUrl + fligthsPath + flightId + "/", flightUpdateBody, {
+      headers: {
+        Authorization: `Token ${token}`,
       },
     })
     .then((response) => response.data)
@@ -144,6 +159,7 @@ const HttpRequestService = {
   deleteReservation,
   addPassengerRequest,
   addFlight,
+  updateFlight,
 };
 
 export default HttpRequestService;

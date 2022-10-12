@@ -28,6 +28,13 @@ const FlightsTable = () => {
   const navigateToAddFlight = () => {
     navigate("/addflight");
   };
+  const navigateToUpdateFlight = (singleFlight) => {
+    navigate("/updateflight", {
+      state: {
+        singleFlight,
+      },
+    });
+  };
 
   const manageAlertOptions = (variant, show, message) => {
     setAlertOptions({
@@ -85,6 +92,7 @@ const FlightsTable = () => {
               <th>Date of Departure</th>
               <th>Hour of Departure</th>
               <th>Add Reservation</th>
+              <th>Update Flight</th>
             </tr>
           </thead>
           <tbody>
@@ -104,6 +112,15 @@ const FlightsTable = () => {
                     className="btn btn-light"
                   >
                     Add Reservation
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => navigateToUpdateFlight(singleFlight)}
+                    type="button"
+                    className="btn btn-light"
+                  >
+                    Update Flight
                   </button>
                 </td>
               </tr>
