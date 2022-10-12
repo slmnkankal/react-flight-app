@@ -56,6 +56,10 @@ const FlightAdd = () => {
         "The flight couldn't created successfully!"
       );
     }
+    setTimeout(() => {
+      manageAlertOptions("", true, "");
+    }, 3000);
+    
     setFlightNumber("");
     setOperationAirlines("");
     setDepartureCity("");

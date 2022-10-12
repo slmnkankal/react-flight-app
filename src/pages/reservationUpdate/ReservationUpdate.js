@@ -87,6 +87,9 @@ const ReservationUpdate = () => {
         "Your reservation updating is failed!"
       );
     }
+    setTimeout(() => {
+      manageAlertOptions("", true, "");
+    }, 3000);
   };
 
   return (

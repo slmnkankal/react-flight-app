@@ -13,8 +13,6 @@ const ReservationAdd = () => {
   const choosenFlight = location?.state?.choosenFlight;
   const allFlights = location?.state?.allFlights;
 
-  // state: { choosenFlight: choosenFlight, allFlights: flightsData },
-
   const [alertOptions, setAlertOptions] = useState({
     variant: null,
     show: false,
@@ -65,6 +63,10 @@ const ReservationAdd = () => {
     } catch (error) {
       manageAlertOptions("danger", true, "Your reservation is failed!");
     }
+    setTimeout(() => {
+      manageAlertOptions("", true, "");
+    }, 3000);
+    
     setFirstName("");
     setLastName("");
     setResvEmail("");
@@ -122,7 +124,7 @@ const ReservationAdd = () => {
                 className="form-control"
                 id="name"
                 placeholder="Enter passenger's first name.."
-                value={firstName} // value={user.Email}
+                value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
               />
@@ -136,7 +138,7 @@ const ReservationAdd = () => {
                 className="form-control"
                 id="surname"
                 placeholder="Enter passenger's last name.."
-                value={lastName} // value={user.Email}
+                value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
