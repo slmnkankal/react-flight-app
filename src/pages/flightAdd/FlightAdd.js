@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
+import NavbarComp from "../../components/navbarComp/NavbarComp";
 import HttpRequestService from "../../utils/HttpRequestService";
 
 const FlightAdd = () => {
@@ -52,7 +53,7 @@ const FlightAdd = () => {
       manageAlertOptions(
         "danger",
         true,
-        "The flight couldn't saved successfully!"
+        "The flight couldn't created successfully!"
       );
     }
     setFlightNumber("");
@@ -65,6 +66,7 @@ const FlightAdd = () => {
 
   return (
     <>
+      <NavbarComp />
       <Alert
         key={alertOptions.variant}
         variant={alertOptions.variant}

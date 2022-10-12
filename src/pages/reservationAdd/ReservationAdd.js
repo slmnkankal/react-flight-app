@@ -5,6 +5,7 @@ import { UserContext } from "../../App";
 import { useLocation } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import NavbarComp from "../../components/navbarComp/NavbarComp";
 
 const ReservationAdd = () => {
   const user = useContext(UserContext);
@@ -61,18 +62,18 @@ const ReservationAdd = () => {
         "Your reservation is successfully saved!"
       );
       navigate("/reservations");
-
     } catch (error) {
-      manageAlertOptions("danger", true, "Your reservation is somehow failed!");
+      manageAlertOptions("danger", true, "Your reservation is failed!");
     }
-    setFirstName("")
-    setLastName("")
-    setResvEmail("")
-    setPhone("")
+    setFirstName("");
+    setLastName("");
+    setResvEmail("");
+    setPhone("");
   };
 
   return (
     <>
+      <NavbarComp />
       <Alert
         key={alertOptions.variant}
         variant={alertOptions.variant}
@@ -97,8 +98,8 @@ const ReservationAdd = () => {
                 id="dropdown"
                 defaultValue={choosenFlight?.id}
               >
-                <option >Select Flight Number</option>
-                <option  value={choosenFlight?.id}>
+                <option>Select Flight Number</option>
+                <option value={choosenFlight?.id}>
                   {choosenFlight?.flight_number}
                 </option>
                 {allFlights?.map((singleFlight) => (
