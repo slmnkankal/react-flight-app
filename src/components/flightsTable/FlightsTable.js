@@ -71,11 +71,11 @@ const FlightsTable = () => {
         {alertOptions.message}
       </Alert>
       <Container className="fluid">
-        <div className="d-flex justify-content-between">
-          <h5 className="d-flex justify-content-start mt-5 fw-bold">Flights</h5>
+        <div className="d-flex justify-content-between  mt-5">
+          <h5 className="d-flex justify-content-start fw-bold">Flights</h5>
           <button
             type="button"
-            className="btn btn-light py-1"
+            className="btn btn-light py-1 px-4"
             onClick={() => navigateToAddFlight()}
           >
             Add Flight
@@ -93,6 +93,7 @@ const FlightsTable = () => {
               <th>Hour of Departure</th>
               <th>Add Reservation</th>
               <th>Update Flight</th>
+              <th>Delete Flight</th>
             </tr>
           </thead>
           <tbody>
@@ -121,6 +122,15 @@ const FlightsTable = () => {
                     className="btn btn-light"
                   >
                     Update Flight
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => navigateToUpdateFlight(singleFlight)}
+                    type="button"
+                    className="btn btn-light"
+                  >
+                    Delete Flight
                   </button>
                 </td>
               </tr>
