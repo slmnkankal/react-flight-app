@@ -48,6 +48,28 @@ const FlightsTable = () => {
     return moment(time).format("ll");
   };
 
+  const deleteFlight = async (singleFlight) => {
+    const flightId = singleFlight.id;
+    try {
+      await HttpRequestService.deleteFlight(token, flightId);
+      fetchFlightsData();
+      manageAlertOptions(
+        "success",
+        true,
+        "The flight is deleted successfully!"
+      );
+    } catch (error) {
+      manageAlertOptions(
+        "danger",
+        true,
+        "You couldn't delete the flight!"
+      );
+    }
+    setTimeout(() => {
+      manageAlertOptions("", true, "");
+    }, 3000);
+  };
+
   const fetchFlightsData = async () => {
     try {
       const data = await HttpRequestService.flights(token);
@@ -126,7 +148,7 @@ const FlightsTable = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => navigateToUpdateFlight(singleFlight)}
+                    onClick={() => deleteFlight(singleFlight)}
                     type="button"
                     className="btn btn-light"
                   >

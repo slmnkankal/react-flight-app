@@ -79,6 +79,20 @@ const updateFlight = (token, flightUpdateBody, flightId) => {
     });
 };
 
+const deleteFlight = (token, flightId) => {
+  return axios
+    .delete(baseUrl + fligthsPath + flightId + "/", {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
+
 const addReservation = (data) => {
   return axios
     .post(baseUrl + allReservationsPath, data.reservationBody, {
@@ -150,16 +164,17 @@ const addPassengerRequest = (token, reservationUpdateBody, reservationId) => {
 
 const HttpRequestService = {
   login,
+  logout,
   register,
   flights,
-  logout,
+  addFlight,
+  updateFlight,
+  deleteFlight,
   addReservation,
   allReservations,
   updateReservation,
   deleteReservation,
   addPassengerRequest,
-  addFlight,
-  updateFlight,
 };
 
 export default HttpRequestService;
