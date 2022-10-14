@@ -106,8 +106,8 @@ const ReservationsPage = () => {
               <th>Last Name</th>
               <th>Email</th>
               <th>Update Reservation</th>
-              <th>Add Passenger</th>
               <th>Delete Reservation</th>
+              <th>Add Passenger</th>
             </tr>
           </thead>
           <tbody>
@@ -135,20 +135,20 @@ const ReservationsPage = () => {
                   </td>
                   <td>
                     <button
-                      onClick={() => navigateToAddPassenger(singleReservation)}
-                      type="button"
-                      className="btn btn-light"
-                    >
-                      Add Passenger
-                    </button>
-                  </td>
-                  <td>
-                    <button
                       onClick={() => deleteReservationsData(singleReservation)}
                       type="button"
                       className="btn btn-light"
                     >
                       Delete Reservation
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => navigateToAddPassenger(singleReservation)}
+                      type="button"
+                      className="btn btn-light"
+                    >
+                      Add Passenger
                     </button>
                   </td>
                 </tr>

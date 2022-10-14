@@ -97,7 +97,7 @@ const FlightsTable = () => {
           <h5 className="d-flex justify-content-start fw-bold">Flights</h5>
           <button
             type="button"
-            className="btn btn-light py-1 px-4"
+            className="btn btn-secondary py-1 px-4"
             onClick={() => navigateToAddFlight()}
           >
             Add Flight

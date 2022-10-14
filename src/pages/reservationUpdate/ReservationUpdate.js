@@ -61,11 +61,6 @@ const ReservationUpdate = () => {
   const token = user.token;
   const reservationId = choosenReservation.id;
 
-  // const handleClick = () => {
-  //   setDeleteValue(1);
-  //     navigate("/reservations");
-  // }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -206,7 +201,7 @@ const ReservationUpdate = () => {
                 type="button"
                 className="btn btn-primary form-control m-1"
                 value="Delete"
-                // onClick={handleClick()}
+                // onClick={() => handleClick()}
               />
             </div>
           </form>
