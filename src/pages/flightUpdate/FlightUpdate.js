@@ -59,7 +59,7 @@ const FlightUpdate = () => {
       );
       navigate("/");
     } catch (error) {
-      manageAlertOptions("danger", true, "The flight updating is failed!");
+      manageAlertOptions("danger", true, `${error.response.data.detail}`);
     }
     setTimeout(() => {
         manageAlertOptions("", true, "");

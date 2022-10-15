@@ -62,7 +62,7 @@ const FlightsTable = () => {
       manageAlertOptions(
         "danger",
         true,
-        "You couldn't delete the flight!"
+        `${error.response.data.detail}`
       );
     }
     setTimeout(() => {
