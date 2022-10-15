@@ -53,12 +53,12 @@ const FlightAdd = () => {
       manageAlertOptions(
         "danger",
         true,
-        "The flight couldn't created successfully!"
+        `${error.response.data.detail}`
       );
     }
     setTimeout(() => {
       manageAlertOptions("", true, "");
-    }, 3000);
+    }, 5000);
     
     setFlightNumber("");
     setOperationAirlines("");
