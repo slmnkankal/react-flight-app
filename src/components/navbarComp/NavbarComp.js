@@ -65,7 +65,6 @@ const NavbarComp = () => {
             <Nav.Link onClick={goReservations} href="#">
               My Reservations
             </Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
