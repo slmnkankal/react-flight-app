@@ -148,7 +148,7 @@ const deleteReservation = (token, reservationId) => {
     });
 };
 
-const addPassengerRequest = (token, reservationUpdateBody, reservationId) => {
+const addAndDeletePassengerRequest = (token, reservationUpdateBody, reservationId) => {
   return axios
     .put(baseUrl + allReservationsPath + reservationId + "/", reservationUpdateBody, {
       headers: {
@@ -174,7 +174,7 @@ const HttpRequestService = {
   allReservations,
   updateReservation,
   deleteReservation,
-  addPassengerRequest,
+  addAndDeletePassengerRequest,
 };
 
 export default HttpRequestService;

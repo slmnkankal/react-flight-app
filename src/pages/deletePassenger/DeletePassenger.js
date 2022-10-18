@@ -7,7 +7,7 @@ import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import NavbarComp from "../../components/navbarComp/NavbarComp";
 
-const AddPassenger = () => {
+const DeletePassenger = () => {
   const location = useLocation();
   const choosenReservation = location?.state?.choosenReservation;
   const choosenPassenger = location?.state?.choosenPassenger;
@@ -22,10 +22,10 @@ const AddPassenger = () => {
     message: "",
   });
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [resvEmail, setResvEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [firstName, setFirstName] = useState(choosenPassenger?.first_name);
+  const [lastName, setLastName] = useState(choosenPassenger?.last_name);
+  const [resvEmail, setResvEmail] = useState(choosenPassenger?.email);
+  const [phone, setPhone] = useState(choosenPassenger?.phone_number);
 
   let navigate = useNavigate();
 
@@ -43,20 +43,13 @@ const AddPassenger = () => {
   const unchangedPassengerList = choosenReservation?.passenger.filter(
     unchangedPassengerFunction
   );
-  const addPassengerItem = {
-    first_name: firstName,
-    last_name: lastName,
-    email: resvEmail,
-    phone_number: phone,
-  };
-  const passengerList = [...unchangedPassengerList, addPassengerItem];
 
   const reservationUpdateBody = {
     id: choosenReservation?.id,
     flight: choosenReservation?.flight,
     flight_id: choosenReservation?.flight_id,
     user: choosenReservation?.user,
-    passenger: passengerList,
+    passenger: unchangedPassengerList,
   };
 
   const handleSubmit = async (e) => {
@@ -70,14 +63,14 @@ const AddPassenger = () => {
       manageAlertOptions(
         "success",
         true,
-        "The passenger is added to the reservation successfully!"
+        "The passenger is deleted successfully!"
       );
       navigate("/reservations");
     } catch (error) {
       manageAlertOptions(
         "danger",
         true,
-        "The passenger couldn't added to the reservation!"
+        "The passenger couldn't deleted!"
       );
     }
   };
@@ -97,7 +90,7 @@ const AddPassenger = () => {
           <img src="https://picsum.photos/400/400" alt="sample-post" />
         </div>
         <div className="reservation-form">
-          <h1 className="form-title display-3">New Passenger</h1>
+          <h1 className="form-title display-3">The Passenger</h1>
           <form id="reservation" onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="name" className="form-label">
@@ -158,7 +151,7 @@ const AddPassenger = () => {
             <input
               type="submit"
               className="btn btn-primary form-control"
-              value="Add Passenger"
+              value="Delete Passenger"
             />
           </form>
         </div>
@@ -167,4 +160,4 @@ const AddPassenger = () => {
   );
 };
 
-export default AddPassenger;
+export default DeletePassenger;

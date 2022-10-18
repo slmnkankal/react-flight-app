@@ -45,6 +45,15 @@ const ReservationsPage = () => {
     });
   };
 
+  const navigateToDeletePassenger = (choosenReservation, choosenPassenger) => {
+    navigate("/deletepassenger", {
+      state: {
+        choosenReservation,
+        choosenPassenger,
+      },
+    });
+  };
+
   const deleteReservationsData = async (singleReservation) => {
     const reservationId = singleReservation.id;
     try {
@@ -108,6 +117,7 @@ const ReservationsPage = () => {
               <th>Update Reservation</th>
               <th>Delete Reservation</th>
               <th>Add Passenger</th>
+              <th>Delete Passenger</th>
             </tr>
           </thead>
           <tbody>
@@ -149,6 +159,15 @@ const ReservationsPage = () => {
                       className="btn btn-light"
                     >
                       Add Passenger
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => navigateToDeletePassenger(singleReservation, singlePassenger)}
+                      type="button"
+                      className="btn btn-light"
+                    >
+                      Delete Passenger
                     </button>
                   </td>
                 </tr>
