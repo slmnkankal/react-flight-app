@@ -14,20 +14,41 @@ import DeletePassenger from "../../pages/deletePassenger/DeletePassenger";
 
 function AppRouter() {
   const user = useContext(UserContext);
-  
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={user.token ? <MainPage /> : <LoginPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/addreservation" element={<ReservationAdd />} />
-        <Route path="/reservations" element={<ReservationsPage />} />
-        <Route path="/updatereservation" element={<ReservationUpdate />} />
-        <Route path="/addpassenger" element={<AddPassenger />} />
-        <Route path="/deletepassenger" element={<DeletePassenger />} />
-        <Route path="/addflight" element={<FlightAdd />} />
-        <Route path="/updateflight" element={<FlightUpdate />} />
+        <Route
+          path="/addreservation"
+          element={user.token ? <ReservationAdd /> : <LoginPage />}
+        />
+        <Route
+          path="/reservations"
+          element={user.token ? <ReservationsPage /> : <LoginPage />}
+        />
+        <Route
+          path="/updatereservation"
+          element={user.token ? <ReservationUpdate /> : <LoginPage />}
+        />
+        <Route
+          path="/addpassenger"
+          element={user.token ? <AddPassenger /> : <LoginPage />}
+        />
+        <Route
+          path="/deletepassenger"
+          element={user.token ? <DeletePassenger /> : <LoginPage />}
+        />
+        <Route
+          path="/addflight"
+          element={user.token ? <FlightAdd /> : <LoginPage />}
+        />
+        <Route
+          path="/updateflight"
+          element={user.token ? <FlightUpdate /> : <LoginPage />}
+        />
       </Routes>
     </BrowserRouter>
   );
