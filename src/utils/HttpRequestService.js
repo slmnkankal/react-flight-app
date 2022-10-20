@@ -10,7 +10,10 @@ const allReservationsPath = "flight/resv/";
 const login = (data) => {
   return axios
     .post(baseUrl + loginPath, data)
-    .then((response) => response.data)
+    .then((response) => {
+      console.log(response)
+      return response.data
+    })
     .catch((error) => {
       console.log(error);
       throw error;
@@ -30,7 +33,10 @@ const logout = (data) => {
 const register = (data) => {
   return axios
     .post(baseUrl + registerPath, data)
-    .then((response) => response.data)
+    .then((response) => {
+      console.log(response)
+      return response.data
+    })
     .catch((error) => {
       console.log(error);
       throw error;
