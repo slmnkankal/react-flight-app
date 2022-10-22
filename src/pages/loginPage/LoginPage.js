@@ -31,7 +31,7 @@ function LoginPage() {
       manageAlertOptions("success", true, "You have successfully logged in!");
       navigate("/");
     } catch (error) {
-      manageAlertOptions("danger", true, "Something went wrong!");
+      manageAlertOptions("danger", true, "You couldn't logged in successfully!");
       navigate("/");
     }
     // setEmail("");
