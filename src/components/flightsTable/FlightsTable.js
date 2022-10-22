@@ -16,7 +16,9 @@ const FlightsTable = () => {
 
   const [flightsData, setFlightsData] = useState();
   const user = useContext(UserContext);
+  const isUserAdmin = user.userDetails.username==="admin"
   const token = user.token;
+
 
   let navigate = useNavigate();
 
@@ -95,13 +97,13 @@ const FlightsTable = () => {
       <Container className="fluid">
         <div className="d-flex justify-content-between  mt-5">
           <h5 className="d-flex justify-content-start fw-bold">Flights</h5>
-          <button
+          {isUserAdmin && <button
             type="button"
             className="btn btn-secondary py-1 px-4"
             onClick={() => navigateToAddFlight()}
           >
             Add Flight
-          </button>
+          </button>}
         </div>
         <Table className="mt-1" striped>
           <thead>
@@ -114,8 +116,8 @@ const FlightsTable = () => {
               <th>Date of Departure</th>
               <th>Hour of Departure</th>
               <th>Add Reservation</th>
-              <th>Update Flight</th>
-              <th>Delete Flight</th>
+              {isUserAdmin && <th>Update Flight</th>}
+              {isUserAdmin && <th>Delete Flight</th>}
             </tr>
           </thead>
           <tbody>
@@ -137,7 +139,7 @@ const FlightsTable = () => {
                     Add Reservation
                   </button>
                 </td>
-                <td>
+                {isUserAdmin && <td>
                   <button
                     onClick={() => navigateToUpdateFlight(singleFlight)}
                     type="button"
@@ -145,8 +147,8 @@ const FlightsTable = () => {
                   >
                     Update Flight
                   </button>
-                </td>
-                <td>
+                </td>}
+                {isUserAdmin && <td>
                   <button
                     onClick={() => deleteFlight(singleFlight)}
                     type="button"
@@ -154,7 +156,7 @@ const FlightsTable = () => {
                   >
                     Delete Flight
                   </button>
-                </td>
+                </td>}
               </tr>
             ))}
           </tbody>
