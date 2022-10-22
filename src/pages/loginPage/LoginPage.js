@@ -108,7 +108,8 @@ function LoginPage() {
           <div className="mt-3">
             <p>If you don't have an account please register!</p>
             <button
-              className="btn btn-primary form-control" //onClick={handleProviderLogin}
+              className="btn btn-primary form-control"
+              onClick={() => navigate("/register")}
             >
               Register
             </button>

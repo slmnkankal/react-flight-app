@@ -179,6 +179,14 @@ function Register() {
                 >
                   Register
                 </button>
+                <p className="mb-2">If you have already been registered plaese login!</p>
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </button>
               </MDBCol>
 
               <MDBCol
