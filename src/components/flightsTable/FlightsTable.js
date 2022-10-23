@@ -16,9 +16,8 @@ const FlightsTable = () => {
 
   const [flightsData, setFlightsData] = useState();
   const user = useContext(UserContext);
-  const isUserAdmin = user.userDetails.username==="admin"
+  const isUserAdmin = user.userDetails.is_staff
   const token = user.token;
-
 
   let navigate = useNavigate();
 
