@@ -1,5 +1,13 @@
 
-https://github.com/slmnkankal/react-flight-app.git
+git clone https://github.com/slmnkankal/react-flight-app.git
+cd react-flight-app
+yarn start
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+git clone https://github.com/slmnkankal/django_flight_app.git
+cd django_flight_app
+python manage.py runserver
+Open [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
 https://github.com/slmnkankal/django_flight_app.git
 
@@ -18,8 +26,3 @@ https://github.com/slmnkankal/react-flight-app/blob/main/flight-app-flights-add-
 https://github.com/slmnkankal/react-flight-app/blob/main/flight-app-reservations-passengers-add-update-delete.gif
 
 ![flight-app-reservations-passengers-add-update-delete](https://user-images.githubusercontent.com/94119964/197400353-94c88dc7-521a-4ee3-9086-dee81293cd64.gif)
-
-### `yarn start`
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-
