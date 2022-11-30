@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseUrl = "http://127.0.0.1:8000/";
+// const baseUrl = "http://127.0.0.1:8000/";
+const baseUrl = "https://django-flight-app.up.railway.app/";
 const loginPath = "users/auth/login/";
 const logoutPath = "users/auth/logout/";
 const fligthsPath = "flight/flights/";
