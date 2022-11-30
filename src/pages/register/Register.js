@@ -50,7 +50,7 @@ function Register() {
         navigate("/login");
       }, 5000);
     } catch (error) {
-      manageAlertOptions("danger", true, "Something went wrong!");
+      manageAlertOptions("danger", true, "You could not register successfully!");
     }
     setUserName("");
     setName("");
