@@ -12,6 +12,7 @@ import { Alert } from "react-bootstrap";
 const NavbarComp = () => {
   const user = useContext(UserContext);
   const userNameUpperCase = user.userDetails.username.toUpperCase();
+  const isUserAdmin = user.userDetails.is_staff
 
   const [alertOptions, setAlertOptions] = useState({
     variant: null,
@@ -63,7 +64,7 @@ const NavbarComp = () => {
               Home
             </Nav.Link>
             <Nav.Link onClick={goReservations} href="#">
-              My Reservations
+              { isUserAdmin ? 'All Reservations' : 'My Reservations' }
             </Nav.Link>
           </Nav>
           <Navbar.Toggle />
