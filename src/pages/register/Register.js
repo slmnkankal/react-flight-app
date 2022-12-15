@@ -51,6 +51,9 @@ function Register() {
       }, 5000);
     } catch (error) {
       manageAlertOptions("danger", true, "You could not register successfully!");
+      setTimeout(() => {
+        manageAlertOptions("", false, "");
+      }, 5000);
     }
     setUserName("");
     setName("");
