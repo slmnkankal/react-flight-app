@@ -38,7 +38,7 @@ function LoginPage() {
     // setPassword("");
     setTimeout(() => {
       manageAlertOptions("", false, "");
-    }, 3000);
+    }, 5000);
   };
 
   const manageAlertOptions = (variant, show, message) => {
