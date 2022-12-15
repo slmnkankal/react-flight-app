@@ -16,7 +16,9 @@ python manage.py runserver
 
 Open [http://localhost:8000](http://localhost:8000) to view it in your browser.
 
-(Note that, you need to add /admin/ or /flight/flights/ or /users/register/ to main url(http://localhost:8000)!)
+(Note that, you need to add /admin/ or /flight/flights/ or /users/register/ to main url (http://localhost:8000)!)
+
+### check app with these users
 
 aselim@murat.com selim.12345 (staff user)
 
