@@ -58,7 +58,7 @@ const NavbarComp = () => {
     <div>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Flight Dashboard</Navbar.Brand>
+          <Navbar.Brand onClick={goHomePage} href="#"><i className="fa-solid fa-plane-departure"></i> Flight Dashboard</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={goHomePage} href="#">
               Home
