@@ -34,8 +34,7 @@ function LoginPage() {
       manageAlertOptions("danger", true, "You couldn't logged in successfully!");
       navigate("/");
     }
-    // setEmail("");
-    // setPassword("");
+    
     setTimeout(() => {
       manageAlertOptions("", false, "");
     }, 5000);
@@ -80,7 +79,7 @@ function LoginPage() {
                 className="form-control"
                 id="email"
                 placeholder="Enter your email address.."
-                value={email} // value={user.Email}
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
