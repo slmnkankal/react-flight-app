@@ -185,4 +185,3 @@ const HttpRequestService = {
 };
 
 export default HttpRequestService;
-
